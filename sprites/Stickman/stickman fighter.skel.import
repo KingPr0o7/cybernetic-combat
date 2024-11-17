@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bnatgw1g8u80h"
+path="res://.godot/imported/stickman fighter.skel-a198b567666f1035bcc387eeae147474.spskel"
+
+[deps]
+
+source_file="res://sprites/Stickman/stickman fighter.skel"
+dest_files=["res://.godot/imported/stickman fighter.skel-a198b567666f1035bcc387eeae147474.spskel"]
+
+[params]
+

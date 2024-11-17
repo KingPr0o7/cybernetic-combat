@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dlsd1sidxft8k"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c0lfs4r3cqy4l" path="res://sprites/Stickman/stickman fighter.atlas" id="1_qncnb"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bnatgw1g8u80h" path="res://sprites/Stickman/stickman fighter.skel" id="2_gu1sd"]
+
+[resource]
+atlas_res = ExtResource("1_qncnb")
+skeleton_file_res = ExtResource("2_gu1sd")

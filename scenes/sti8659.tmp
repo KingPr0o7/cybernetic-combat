@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi1aniw6wvdp5"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dlsd1sidxft8k" path="res://sprites/Stickman/stickman.tres" id="1_51526"]
+[ext_resource type="Script" path="res://scenes/scripts/spine_sprite.gd" id="2_asep4"]
+
+[node name="Stickmen" type="Node2D"]
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+position = Vector2(873, 1037)
+skeleton_data_res = ExtResource("1_51526")
+preview_skin = "black"
+preview_animation = "1_/__run stop"
+preview_frame = false
+preview_time = 0.0
+script = ExtResource("2_asep4")

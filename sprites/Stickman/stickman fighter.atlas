@@ -1,0 +1,244 @@
+stickman fighter.png
+size:1638,1543
+filter:Linear,Linear
+pma:true
+stickman/arm_L
+bounds:817,1117,435,83
+stickman/arm_R
+bounds:650,1033,434,82
+stickman/arm_stroke_L
+bounds:817,1426,470,115
+stickman/arm_stroke_R
+bounds:2,292,471,114
+rotate:90
+stickman/body
+bounds:621,858,70,383
+rotate:90
+stickman/body_stroke
+bounds:621,930,101,396
+offsets:0,8,101,413
+rotate:90
+stickman/eyes-A
+bounds:1457,136,170,50
+stickman/eyes-B
+bounds:1019,928,103,32
+rotate:90
+stickman/head
+bounds:368,843,251,251
+stickman/head_stroke
+bounds:366,1096,282,282
+stickman/leg_L
+bounds:817,1296,93,455
+rotate:90
+stickman/leg_R
+bounds:817,1202,92,455
+rotate:90
+stickman/leg_stroke_L
+bounds:240,1054,124,487
+stickman/leg_stroke_R
+bounds:112,1053,126,488
+stickman/mouth
+bounds:1562,886,122,46
+rotate:90
+stickman/shadow
+bounds:817,1391,537,33
+vfx/energy radial/energy radial_00000
+bounds:866,442,154,154
+offsets:91,92,334,334
+vfx/energy radial/energy radial_00001
+bounds:1015,264,154,153
+offsets:89,92,334,334
+vfx/energy radial/energy radial_00002
+bounds:1171,257,154,153
+offsets:90,88,334,334
+vfx/energy radial/energy radial_00003
+bounds:504,289,155,153
+offsets:91,93,334,334
+rotate:90
+vfx/energy radial/energy radial_00004
+bounds:673,190,154,154
+offsets:92,92,334,334
+vfx/energy radial/energy radial_00005
+bounds:1327,257,154,153
+offsets:88,92,334,334
+vfx/energy radial/energy radial_00006
+bounds:1008,108,154,154
+offsets:90,94,334,334
+vfx/energy radial/energy radial_00007
+bounds:1164,101,154,154
+offsets:85,95,334,334
+vfx/energy ray/energy ray_00000
+bounds:673,110,78,80
+offsets:5,132,334,334
+rotate:90
+vfx/energy ray/energy ray_00001
+bounds:1469,15,92,119
+offsets:5,114,334,334
+vfx/energy ray/energy ray_00002
+bounds:1320,2,102,147
+offsets:4,100,334,334
+rotate:90
+vfx/energy ray/energy ray_00003
+bounds:1524,537,90,140
+offsets:4,105,334,334
+vfx/energy ray/energy ray_00004
+bounds:959,23,83,110
+offsets:1,115,334,334
+rotate:90
+vfx/energy ray/energy ray_00005
+bounds:2,2,260,98
+offsets:4,122,334,334
+vfx/energy ray/energy ray_00006
+bounds:118,289,292,183
+offsets:6,77,334,334
+vfx/energy ray/energy ray_00007
+bounds:439,519,322,183
+offsets:6,88,334,334
+rotate:90
+vfx/energy ray/energy ray_00008
+bounds:1274,1203,323,160
+offsets:5,97,334,334
+vfx/energy ray/energy ray_00009
+bounds:1274,1050,321,151
+offsets:5,99,334,334
+vfx/energy ray/energy ray_00010
+bounds:2,102,325,185
+offsets:5,74,334,334
+vfx/energy ray/energy ray_00011
+bounds:1289,1441,322,100
+offsets:8,116,334,334
+vfx/energy ray/energy ray_00012
+bounds:356,487,297,81
+offsets:8,124,334,334
+rotate:90
+vfx/energy ray/energy ray_00013
+bounds:1356,1365,271,74
+offsets:10,126,334,334
+vfx/energy ray/energy ray_00014
+bounds:264,28,231,72
+offsets:19,126,334,334
+vfx/energy ray/energy ray_00015
+bounds:1537,679,205,59
+offsets:36,133,334,334
+rotate:90
+vfx/energy ray/energy ray_00016
+bounds:1598,1010,191,38
+offsets:44,145,334,334
+rotate:90
+vfx/muzzle flash pistol/muzzle flash pistol_00000
+bounds:1071,4,102,90
+offsets:11,125,334,334
+rotate:90
+vfx/muzzle flash pistol/muzzle flash pistol_00001
+bounds:624,510,240,89
+offsets:26,124,334,334
+vfx/muzzle flash pistol/muzzle flash pistol_00002
+bounds:866,598,258,146
+offsets:26,101,334,334
+rotate:90
+vfx/muzzle flash pistol/muzzle flash pistol_00003
+bounds:329,102,264,185
+offsets:41,79,334,334
+vfx/muzzle flash pistol/muzzle flash pistol_00004
+bounds:1086,866,249,183
+offsets:58,82,334,334
+rotate:90
+vfx/muzzle flash pistol/muzzle flash pistol_00005
+bounds:650,1135,243,165
+offsets:62,93,334,334
+rotate:90
+vfx/muzzle flash pistol/muzzle flash pistol_00006
+bounds:595,2,106,154
+offsets:100,95,334,334
+rotate:90
+vfx/muzzle flash rifle/muzzle flash rifle_00000
+bounds:112,786,254,265
+offsets:3,57,334,334
+vfx/muzzle flash rifle/muzzle flash rifle_00001
+bounds:1271,683,264,201
+offsets:6,51,334,334
+vfx/muzzle flash rifle/muzzle flash rifle_00002
+bounds:1271,886,162,289
+offsets:4,22,334,334
+rotate:90
+vfx/muzzle flash uzi/muzzle flash uzi_00000
+bounds:1483,188,146,126
+offsets:0,105,334,334
+vfx/muzzle flash uzi/muzzle flash uzi_00001
+bounds:1320,106,135,149
+offsets:6,94,334,334
+vfx/muzzle flash uzi/muzzle flash uzi_00002
+bounds:1238,412,219,115
+offsets:9,115,334,334
+vfx/muzzle flash uzi/muzzle flash uzi_00003
+bounds:850,265,163,175
+offsets:11,107,334,334
+vfx/muzzle flash uzi/muzzle flash uzi_00004
+bounds:1022,419,214,192
+offsets:13,93,334,334
+vfx/slash/slash_0
+bounds:624,601,240,255
+offsets:10,0,260,264
+vfx/slash/slash_1
+bounds:1014,613,224,251
+offsets:20,0,260,264
+vfx/slash/slash_2
+bounds:659,346,189,162
+offsets:38,0,260,264
+vfx/slash/slash_3
+bounds:1483,316,153,114
+offsets:52,34,260,264
+vfx/smoke right/smoke right_00000
+bounds:1240,753,111,29
+offsets:33,160,334,334
+rotate:90
+vfx/smoke right/smoke right_00001
+bounds:1468,520,161,54
+offsets:39,152,334,334
+rotate:90
+vfx/smoke right/smoke right_00002
+bounds:439,446,179,71
+offsets:46,152,334,334
+vfx/smoke right/smoke right_00003
+bounds:595,110,177,76
+offsets:55,151,334,334
+rotate:90
+vfx/smoke right/smoke right_00004
+bounds:829,182,177,81
+offsets:60,149,334,334
+vfx/smoke right/smoke right_00005
+bounds:755,96,177,84
+offsets:64,148,334,334
+vfx/smoke right/smoke right_00006
+bounds:1459,432,177,86
+offsets:67,147,334,334
+vfx/smoke right/smoke right_00007
+bounds:412,289,151,90
+offsets:97,143,334,334
+rotate:90
+vfx/smoke right/smoke right_00008
+bounds:751,2,103,92
+offsets:148,141,334,334
+vfx/smoke right/smoke right_00009
+bounds:856,2,101,92
+offsets:152,140,334,334
+vfx/smoke right/smoke right_00010
+bounds:497,14,94,86
+offsets:161,140,334,334
+vfx/smoke right/smoke right_00011
+bounds:1563,43,91,71
+offsets:164,139,334,334
+rotate:90
+vfx/smoke right/smoke right_00012
+bounds:368,786,32,55
+offsets:224,139,334,334
+weapon/pistol
+bounds:1240,529,226,152
+weapon/rifle
+bounds:366,1380,449,161
+weapon/sword
+bounds:2,765,108,776
+offsets:16,0,135,793
+weapon/uzi
+bounds:118,474,310,236
+rotate:90

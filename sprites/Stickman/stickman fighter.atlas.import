@@ -1,0 +1,15 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://c0lfs4r3cqy4l"
+path="res://.godot/imported/stickman fighter.atlas-f08e43106f5529cba0c45cfabb7a7674.spatlas"
+
+[deps]
+
+source_file="res://sprites/Stickman/stickman fighter.atlas"
+dest_files=["res://.godot/imported/stickman fighter.atlas-f08e43106f5529cba0c45cfabb7a7674.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
