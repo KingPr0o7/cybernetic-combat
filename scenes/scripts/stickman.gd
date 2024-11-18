@@ -1,5 +1,6 @@
-extends SpineSprite
+extends CharacterBody2D
 
+@onready var SPRITE = $Sprite
 @export var gravity = 750
 @export var run_speed = 500
 @export var jump_speed = -400
@@ -58,10 +59,10 @@ func play_animation(animation_name: String, loop: bool, track: int, additive: bo
 	"""
 	
 	if additive == false:
-		get_animation_state().set_animation(animation_name, loop, track)
+		SPRITE.get_animation_state().set_animation(animation_name, loop, track)
 	else:
 		assert(delay > 0.00, "Animation player cannot have a delay of: %sms. It has to be greater than 0.00ms." % delay)
-		get_animation_state().add_animation(animation_name, delay, loop, track)
+		SPRITE.get_animation_state().add_animation(animation_name, delay, loop, track)
 
 func set_skin(color: String):
 	"""
@@ -69,8 +70,8 @@ func set_skin(color: String):
 	available colors to choose from, defined at the const of COLORS.
 	"""
 
-	var skin = get_skeleton().get_data().find_skin(color)
-	get_skeleton().set_skin(skin)
+	var skin = SPRITE.get_skeleton().get_data().find_skin(color)
+	SPRITE.get_skeleton().set_skin(skin)
 
 #
 # State Machine
@@ -93,9 +94,27 @@ func change_state(new_state):
 
 func get_input():
 	var walk_left = Input.is_action_pressed("walk_left")
-	var walk_right = Input.is_action_pressed("walk_left")
+	var walk_right = Input.is_action_pressed("walk_right")
+	#var jump = Input.is_action_just_pressed("jump")
+
+	velocity.x = 0
+
+	if walk_right:
+		velocity.x += run_speed
+		SPRITE.get_skeleton().set_scale_x(1)
+	elif walk_left:
+		velocity.x -= run_speed
+		SPRITE.get_skeleton().set_scale_x(-1)
+
+	if state == IDLE and velocity.x != 0:
+		change_state(WALK)
+
+func _physics_process(delta: float) -> void:
+	#velocity.y += gravity * delta
+	get_input()
+	move_and_slide()
 
 func _ready():
 	change_state(IDLE) # Starting State Machine
-	set_skin(COLORS.cerulia)
-	play_animation("run", true, 0)
+	set_skin(COLORS.midnight)
+	play_animation("idle", true, 0)

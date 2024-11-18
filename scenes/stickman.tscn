@@ -1,14 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjyqxgt751a7p"]
+[gd_scene load_steps=4 format=3 uid="uid://bjyqxgt751a7p"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dlsd1sidxft8k" path="res://sprites/Stickman/stickman.tres" id="1_f50rp"]
 [ext_resource type="Script" path="res://scenes/scripts/stickman.gd" id="2_jnul0"]
 
-[node name="Stickman" type="SpineSprite"]
-position = Vector2(967, 1073)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1qc"]
+size = Vector2(79, 413)
+
+[node name="Stickman" type="CharacterBody2D"]
+show_behind_parent = true
+position = Vector2(942, 1047)
+scale = Vector2(1, 1)
+script = ExtResource("2_jnul0")
+
+[node name="Sprite" type="SpineSprite" parent="."]
 scale = Vector2(0.400418, 0.416089)
 skeleton_data_res = ExtResource("1_f50rp")
 preview_skin = "cerulia"
 preview_animation = "-- Empty --"
 preview_frame = false
 preview_time = 0.0
-script = ExtResource("2_jnul0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.5, -232.5)
+shape = SubResource("RectangleShape2D_nm1qc")

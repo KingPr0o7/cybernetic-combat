@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://y022oko5ohew"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_447ie"]
-[ext_resource type="Texture2D" uid="uid://b16103inw80lq" path="res://backgrounds/parallax_layers/alaska/stars.png" id="1_v6bym"]
-[ext_resource type="Texture2D" uid="uid://ckfxjyqxusdrk" path="res://backgrounds/parallax_layers/alaska/aurora.png" id="2_2ao4s"]
+[ext_resource type="Texture2D" path="res://backgrounds/parallax_layers/alaska/stars.png" id="1_v6bym"]
+[ext_resource type="Texture2D" path="res://backgrounds/parallax_layers/alaska/aurora.png" id="2_2ao4s"]
 [ext_resource type="PackedScene" uid="uid://bjyqxgt751a7p" path="res://scenes/stickman.tscn" id="2_vla03"]
-[ext_resource type="Texture2D" uid="uid://bb3as47wteax1" path="res://backgrounds/parallax_layers/alaska/mountains.png" id="3_3tjkg"]
+[ext_resource type="Texture2D" path="res://backgrounds/parallax_layers/alaska/mountains.png" id="3_3tjkg"]
 [ext_resource type="Texture2D" uid="uid://cav6ullj3tj15" path="res://sprites/ui/logo.png" id="4_1ll2i"]
 [ext_resource type="Texture2D" uid="uid://cyqrkkf33l07e" path="res://sprites/ui/start.png" id="5_wjjdq"]
 [ext_resource type="Texture2D" uid="uid://drxw77vspey3e" path="res://sprites/ui/settings.png" id="6_mwj2a"]
