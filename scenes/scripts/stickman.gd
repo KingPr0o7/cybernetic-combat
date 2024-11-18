@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-@onready var SPRITE = $Sprite
+@onready var SPINE = $Sprite # SpineSprite Node
 @export var gravity = 750
-@export var run_speed = 500
+@export var walk_speed = 400
+@export var run_speed = 800
 @export var jump_speed = -400
 
+# All the available colors imported within the SpineSprite Node. 
 const COLORS = {
 	amethystine = "amethystine",
 	plumshade = "plumshade",
@@ -20,6 +22,7 @@ const COLORS = {
 	midnight = "midnight"
 }
 
+# All the available animations imported within the SpineSprite Node. 
 const ANIMATIONS = {
 	block = "block",
 	charged_kick = "charged_kick",
@@ -41,13 +44,14 @@ const ANIMATIONS = {
 	walk = "walk"
 }
 
-enum {IDLE, WALK, RUN, JUMP, PUNCH, KICK, HURT, DEAD} # State Initializer 
-var state = IDLE
+enum STATES {IDLE, WALKING, RUNNING, JUMPING, PUNCHING, KICKING, RUN_STOP, HURT, DEAD} # State Initializer 
+var state = STATES.IDLE
+var current_animation = ""
 
 #
-# Displayment Handlers
-#   These functions, play_animation & set_skin change how the a Stickman looks.
-#   Both functions are called at least one to display a stickman onto the game scnene, 
+# Animation Handlers
+#   These functions, play_animation & set_skin change how the Stickman looks.
+#   Both functions are called at least once to display a stickman onto the game scene, 
 #   as it cannot be done through the editor. 
 #
 
@@ -58,11 +62,13 @@ func play_animation(animation_name: String, loop: bool, track: int, additive: bo
 	the current set animation, it requires a delay duration.
 	"""
 	
-	if additive == false:
-		SPRITE.get_animation_state().set_animation(animation_name, loop, track)
-	else:
-		assert(delay > 0.00, "Animation player cannot have a delay of: %sms. It has to be greater than 0.00ms." % delay)
-		SPRITE.get_animation_state().add_animation(animation_name, delay, loop, track)
+	if current_animation != animation_name: # Only play the animation if it's not already playing
+		current_animation = animation_name
+		if additive == false:
+			SPINE.get_animation_state().set_animation(animation_name, loop, track)
+		else:
+			assert(delay > 0.00, "Animation player cannot have a delay of: %sms. It has to be greater than 0.00ms." % delay)
+			SPINE.get_animation_state().add_animation(animation_name, delay, loop, track)
 
 func set_skin(color: String):
 	"""
@@ -70,51 +76,103 @@ func set_skin(color: String):
 	available colors to choose from, defined at the const of COLORS.
 	"""
 
-	var skin = SPRITE.get_skeleton().get_data().find_skin(color)
-	SPRITE.get_skeleton().set_skin(skin)
+	var skin = SPINE.get_skeleton().get_data().find_skin(color)
+	SPINE.get_skeleton().set_skin(skin)
 
 #
-# State Machine
-#   Describe.
+# Input to State Interpreter
+#	These functions listen for keybind events to transition between 
+#	different states, updating the state to be processed in the 
+#	physics server or other game logic.
 #
 
-func change_state(new_state):
-	state = new_state
-	match state:
-		IDLE:
-			play_animation(ANIMATIONS.idle, true, 0)
-		WALK:
-			play_animation(ANIMATIONS.walk, true, 0)
-		RUN:
-			play_animation(ANIMATIONS.run, true, 0)
+func input_listener(listener_state):
+	"""
+    Handles the input of bidirectional locomotion (A and D keys) and their state transitions. 
+	Including their modifier, the SHIFT key. This function detects combinations such as 
+	movement keys and other states (e.g., jumping) to determine the next state.
+	"""
 
+	# IDLE to WALKING
+	if listener_state == STATES.IDLE:
+		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+			state = STATES.WALKING
+
+	# WALKING TO RUNNING OR IDLE		
+	elif listener_state == STATES.WALKING:
+		if Input.is_action_pressed("sprint"):
+			state = STATES.RUNNING
+		if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+			state = STATES.IDLE	
+
+	# RUNNING TO IDLE
+	elif listener_state == STATES.RUNNING:
+		if !Input.is_action_pressed("sprint"):
+			state = STATES.IDLE
+		if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+			state = STATES.RUN_STOP
 #
-# Input Handler 
+# Physics Handlers
+#	Controls and applies needed physics along with proceeding changes to the Stickman
+#	character like the direction, animation, and velocity. 
 #
 
-func get_input():
-	var walk_left = Input.is_action_pressed("walk_left")
-	var walk_right = Input.is_action_pressed("walk_right")
-	#var jump = Input.is_action_just_pressed("jump")
+func bidirectional_velocity(direction: int, speed: int):
+	"""
+	Takes in a direction to flip both the velocity and the facing direction
+	of the Stickman character.
+	"""
+	if direction == 1:
+		velocity.x += speed
+	elif direction == -1:
+		velocity.x -= speed
+
+	SPINE.get_skeleton().set_scale_x(direction) # Flips the Stickman on the x-axis.
+
+func _physics_process(_delta: float) -> void:
+	"""
+	Controls the continuous physics processes, and thus state of the Stickman
+	within the level (velocity, direction, animation, and state).
+	"""
+
+	var right = Input.is_action_pressed("right")
+	var left = Input.is_action_pressed("left")
+
+	#velocity.y += gravity * delta
 
 	velocity.x = 0
 
-	if walk_right:
-		velocity.x += run_speed
-		SPRITE.get_skeleton().set_scale_x(1)
-	elif walk_left:
-		velocity.x -= run_speed
-		SPRITE.get_skeleton().set_scale_x(-1)
+	match state:
+		STATES.IDLE:
+			input_listener(STATES.IDLE)
+			play_animation(ANIMATIONS.idle, true, 0)
+		STATES.WALKING:
+			input_listener(STATES.WALKING)
 
-	if state == IDLE and velocity.x != 0:
-		change_state(WALK)
+			if right:
+				bidirectional_velocity(1, walk_speed)
+			if left:
+				bidirectional_velocity(-1, walk_speed)
 
-func _physics_process(delta: float) -> void:
-	#velocity.y += gravity * delta
-	get_input()
+			play_animation(ANIMATIONS.walk, true, 0)
+		STATES.RUNNING:
+			input_listener(STATES.RUNNING)
+		
+			if right:
+				bidirectional_velocity(1, run_speed)
+			if left:
+				bidirectional_velocity(-1, run_speed)
+
+			play_animation(ANIMATIONS.run, true, 0)
+
+		STATES.RUN_STOP:
+			play_animation(ANIMATIONS.run_stop, false, 0)
+			play_animation(ANIMATIONS.idle, true, 0, true, 0.8)
+			state = STATES.IDLE
+	
 	move_and_slide()
 
 func _ready():
-	change_state(IDLE) # Starting State Machine
+	state = STATES.IDLE
 	set_skin(COLORS.midnight)
-	play_animation("idle", true, 0)
+	current_animation = ""
