@@ -1,25 +1,111 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjyqxgt751a7p"]
+[gd_scene load_steps=7 format=3 uid="uid://bjyqxgt751a7p"]
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dlsd1sidxft8k" path="res://sprites/Stickman/stickman.tres" id="1_f50rp"]
 [ext_resource type="Script" path="res://scenes/scripts/stickman.gd" id="2_jnul0"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo1dm"]
+size = Vector2(21.4686, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc3xu"]
+size = Vector2(223.397, 133.274)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m804i"]
+size = Vector2(16.1516, 46.9424)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm1qc"]
-size = Vector2(79, 413)
+size = Vector2(22, 26)
 
 [node name="Stickman" type="CharacterBody2D"]
 show_behind_parent = true
 position = Vector2(942, 1047)
-scale = Vector2(1, 1)
 script = ExtResource("2_jnul0")
 
 [node name="Sprite" type="SpineSprite" parent="."]
 scale = Vector2(0.400418, 0.416089)
 skeleton_data_res = ExtResource("1_f50rp")
 preview_skin = "cerulia"
-preview_animation = "-- Empty --"
+preview_animation = "jab_single"
 preview_frame = false
 preview_time = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7.5, -232.5)
+[node name="left_fist" type="SpineBoneNode" parent="Sprite"]
+show_behind_parent = true
+position = Vector2(475.322, -688.697)
+rotation = -0.0375219
+scale = Vector2(1.06231, 1.06231)
+bone_name = "left_fist"
+
+[node name="Area2D" type="Area2D" parent="Sprite/left_fist"]
+scale = Vector2(1, 1)
+
+[node name="left_fist_coll" type="CollisionShape2D" parent="Sprite/left_fist/Area2D"]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_mo1dm")
+debug_color = Color(0, 0.640225, 0.35311, 0.42)
+
+[node name="right_fist" type="SpineBoneNode" parent="Sprite"]
+show_behind_parent = true
+position = Vector2(151.813, -673.84)
+rotation = -1.69547
+scale = Vector2(1, 1)
+bone_name = "right_fist"
+
+[node name="Area2D" type="Area2D" parent="Sprite/right_fist"]
+scale = Vector2(1, 1)
+
+[node name="right_fist_coll" type="CollisionShape2D" parent="Sprite/right_fist/Area2D"]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_mo1dm")
+debug_color = Color(0.849967, 0.342046, 0.399602, 0.42)
+
+[node name="left_tibia" type="SpineBoneNode" parent="Sprite"]
+show_behind_parent = true
+position = Vector2(235.745, -221.729)
+rotation = 1.58216
+scale = Vector2(1, 1)
+bone_name = "left_tibia"
+
+[node name="Area2D" type="Area2D" parent="Sprite/left_tibia"]
+scale = Vector2(1, 1)
+
+[node name="left_tibia_coll" type="CollisionShape2D" parent="Sprite/left_tibia/Area2D"]
+position = Vector2(91.4817, -11.8447)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_lc3xu")
+debug_color = Color(0, 0.639216, 0.352941, 0.419608)
+
+[node name="right_tibia" type="SpineBoneNode" parent="Sprite"]
+show_behind_parent = true
+position = Vector2(-24.8174, -131.872)
+rotation = 2.75259
+scale = Vector2(1, 1)
+bone_name = "right_tibia"
+
+[node name="Area2D" type="Area2D" parent="Sprite/right_tibia"]
+scale = Vector2(1, 1)
+
+[node name="right_tibia_coll" type="CollisionShape2D" parent="Sprite/right_tibia/Area2D"]
+position = Vector2(105.184, -1.896)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_lc3xu")
+debug_color = Color(0.85098, 0.341176, 0.4, 0.419608)
+
+[node name="hitbox" type="SpineBoneNode" parent="Sprite"]
+show_behind_parent = true
+position = Vector2(85.3318, -677.213)
+rotation = -1.50538
+scale = Vector2(1, 1)
+bone_name = "head"
+
+[node name="Area2D" type="Area2D" parent="Sprite/hitbox"]
+
+[node name="hitbox_coll" type="CollisionShape2D" parent="Sprite/hitbox/Area2D"]
+position = Vector2(-172.378, -1.01929)
+scale = Vector2(50, 5)
+shape = SubResource("RectangleShape2D_m804i")
+
+[node name="center_mass" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(8, -240)
 shape = SubResource("RectangleShape2D_nm1qc")
+debug_color = Color(0.566151, 0.51516, 0.584586, 0.42)

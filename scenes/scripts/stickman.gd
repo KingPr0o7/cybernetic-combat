@@ -1,6 +1,13 @@
 extends CharacterBody2D
 
 @onready var SPINE = $Sprite # SpineSprite Node
+
+@onready var left_fist = $Sprite/left_fist/Area2D/left_fist_coll
+@onready var right_fist = $Sprite/right_fist/Area2D/right_fist_coll
+
+@onready var left_tibia = $Sprite/left_tibia/Area2D/left_tibia_coll
+@onready var right_tibia = $Sprite/right_tibia/Area2D/right_tibia_coll
+
 @export var gravity = 750
 @export var walk_speed = 400
 @export var run_speed = 800
@@ -88,7 +95,7 @@ func set_skin(color: String):
 
 func input_listener(listener_state):
 	"""
-    Handles the input of bidirectional locomotion (A and D keys) and their state transitions. 
+	Handles the input of bidirectional locomotion (A and D keys) and their state transitions. 
 	Including their modifier, the SHIFT key. This function detects combinations such as 
 	movement keys and other states (e.g., jumping) to determine the next state.
 	"""
@@ -97,6 +104,9 @@ func input_listener(listener_state):
 	if listener_state == STATES.IDLE:
 		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 			state = STATES.WALKING
+
+		if Input.is_action_pressed("punch"):
+			state = STATES.PUNCHING
 
 	# WALKING TO RUNNING OR IDLE		
 	elif listener_state == STATES.WALKING:
@@ -111,6 +121,13 @@ func input_listener(listener_state):
 			state = STATES.IDLE
 		if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
 			state = STATES.RUN_STOP
+
+	#PUNCHING
+	elif listener_state == STATES.PUNCHING:
+		await get_tree().create_timer(0.30).timeout
+		if !Input.is_action_pressed("punch"):
+			play_animation(ANIMATIONS.idle, true, 0, true, 0.5)
+			state = STATES.IDLE
 #
 # Physics Handlers
 #	Controls and applies needed physics along with proceeding changes to the Stickman
@@ -169,10 +186,19 @@ func _physics_process(_delta: float) -> void:
 			play_animation(ANIMATIONS.run_stop, false, 0)
 			play_animation(ANIMATIONS.idle, true, 0, true, 0.8)
 			state = STATES.IDLE
+
+		STATES.PUNCHING:
+			input_listener(STATES.PUNCHING)
+			play_animation(ANIMATIONS.jab_single, false, 0)
+
 	
 	move_and_slide()
 
 func _ready():
-	state = STATES.IDLE
 	set_skin(COLORS.midnight)
-	current_animation = ""
+	left_fist.disabled = true
+	right_fist.disabled = true
+
+	left_tibia.disabled = true
+	right_tibia.disabled = true
+	#$Sprite/AnimationPlayer.play("jab_single")
