@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var SPINE = $Sprite # SpineSprite Node
+@onready var STATE_INDICATOR = $Sprite/state_indicator 
 
 @onready var left_fist = $Sprite/left_fist/Area2D/left_fist_coll
 @onready var right_fist = $Sprite/right_fist/Area2D/right_fist_coll
@@ -51,7 +52,7 @@ const ANIMATIONS = {
 	walk = "walk"
 }
 
-enum STATES {IDLE, WALKING, RUNNING, JUMPING, PUNCHING, KICKING, RUN_STOP, HURT, DEAD} # State Initializer 
+enum STATES {IDLE, WALKING, RUNNING, JUMPING, JABBING_SINGLES, JABBING_DOUBLES, KICKING, RUN_STOP, HURT, DEAD} # State Initializer 
 var state = STATES.IDLE
 var current_animation = ""
 
@@ -106,7 +107,10 @@ func input_listener(listener_state):
 			state = STATES.WALKING
 
 		if Input.is_action_pressed("punch"):
-			state = STATES.PUNCHING
+			state = STATES.JABBING_SINGLES
+			await get_tree().create_timer(0.30).timeout
+			if Input.is_action_pressed("punch"):
+				state = STATES.JABBING_DOUBLES
 
 	# WALKING TO RUNNING OR IDLE		
 	elif listener_state == STATES.WALKING:
@@ -123,11 +127,21 @@ func input_listener(listener_state):
 			state = STATES.RUN_STOP
 
 	#PUNCHING
-	elif listener_state == STATES.PUNCHING:
-		await get_tree().create_timer(0.30).timeout
-		if !Input.is_action_pressed("punch"):
-			play_animation(ANIMATIONS.idle, true, 0, true, 0.5)
+	elif listener_state == STATES.JABBING_SINGLES:
+		if Input.is_action_pressed("punch"):
+			state = STATES.JABBING_SINGLES
+		else:
 			state = STATES.IDLE
+	
+	elif listener_state == STATES.JABBING_DOUBLES:
+		if Input.is_action_pressed("punch"):
+			state = STATES.JABBING_DOUBLES
+		else:
+			state = STATES.IDLE
+		await get_tree().create_timer(0.30).timeout
+				
+
+
 #
 # Physics Handlers
 #	Controls and applies needed physics along with proceeding changes to the Stickman
@@ -155,6 +169,7 @@ func _physics_process(_delta: float) -> void:
 	var right = Input.is_action_pressed("right")
 	var left = Input.is_action_pressed("left")
 
+	var state_word = ""
 	#velocity.y += gravity * delta
 
 	velocity.x = 0
@@ -187,18 +202,36 @@ func _physics_process(_delta: float) -> void:
 			play_animation(ANIMATIONS.idle, true, 0, true, 0.8)
 			state = STATES.IDLE
 
-		STATES.PUNCHING:
-			input_listener(STATES.PUNCHING)
+		STATES.JABBING_SINGLES:
+			input_listener(STATES.JABBING_SINGLES)
 			play_animation(ANIMATIONS.jab_single, false, 0)
 
-	
+		STATES.JABBING_DOUBLES:
+			input_listener(STATES.JABBING_DOUBLES)
+			play_animation(ANIMATIONS.jab_double, false, 0)
+
+	if state == STATES.IDLE:
+		state_word = "IDLE"
+	elif state == STATES.WALKING:
+		state_word = "WALKING"
+	elif state == STATES.RUNNING:
+		state_word = "RUNNING"
+	elif state == STATES.RUN_STOP:
+		state_word = "RUNNING STOPPING"
+	elif state == STATES.JABBING_SINGLES:
+		state_word = "JABBING (SINGLES)"
+	elif state == STATES.JABBING_DOUBLES:
+		state_word = "JABBING (DOUBLES)"
+
+	STATE_INDICATOR.text = state_word
+
 	move_and_slide()
 
 func _ready():
 	set_skin(COLORS.midnight)
-	left_fist.disabled = true
-	right_fist.disabled = true
+	#left_fist.disabled = true
+	#right_fist.disabled = true
 
-	left_tibia.disabled = true
-	right_tibia.disabled = true
+	#left_tibia.disabled = true
+	#right_tibia.disabled = true
 	#$Sprite/AnimationPlayer.play("jab_single")
