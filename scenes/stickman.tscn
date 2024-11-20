@@ -106,8 +106,16 @@ offset_left = -86.6262
 offset_top = -1198.53
 offset_right = 64.3738
 offset_bottom = -1129.53
-text = "Test
+text = "EMPTY
 "
+label_settings = SubResource("LabelSettings_8h3n7")
+
+[node name="velocity_indicator" type="Label" parent="Sprite"]
+offset_left = -42.4556
+offset_top = -1134.37
+offset_right = 108.544
+offset_bottom = -1065.37
+text = "(x, y)"
 label_settings = SubResource("LabelSettings_8h3n7")
 
 [node name="center_mass" type="CollisionShape2D" parent="."]
