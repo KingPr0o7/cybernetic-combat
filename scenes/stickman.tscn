@@ -123,3 +123,6 @@ visible = false
 position = Vector2(8, -240)
 shape = SubResource("RectangleShape2D_nm1qc")
 debug_color = Color(0.566151, 0.51516, 0.584586, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(7, -261)
