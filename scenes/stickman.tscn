@@ -21,6 +21,7 @@ size = Vector2(22, 26)
 [node name="Stickman" type="CharacterBody2D"]
 show_behind_parent = true
 position = Vector2(942, 1047)
+scale = Vector2(0.7, 0.7)
 script = ExtResource("2_jnul0")
 
 [node name="Sprite" type="SpineSprite" parent="."]
@@ -33,7 +34,7 @@ preview_time = 0.0
 
 [node name="left_fist" type="SpineBoneNode" parent="Sprite"]
 show_behind_parent = true
-position = Vector2(406.457, -775.214)
+position = Vector2(406.457, -775.215)
 rotation = -0.0699567
 scale = Vector2(1, 1)
 bone_name = "left_fist"
@@ -49,7 +50,6 @@ debug_color = Color(0, 0.640225, 0.35311, 0.42)
 show_behind_parent = true
 position = Vector2(-366.505, -750.413)
 rotation = -3.11351
-scale = Vector2(1, 1)
 bone_name = "right_fist"
 
 [node name="Area2D" type="Area2D" parent="Sprite/right_fist"]
@@ -61,7 +61,7 @@ debug_color = Color(0.849967, 0.342046, 0.399602, 0.42)
 
 [node name="left_tibia" type="SpineBoneNode" parent="Sprite"]
 show_behind_parent = true
-position = Vector2(64.3257, -221.88)
+position = Vector2(64.3259, -221.88)
 rotation = 1.46138
 scale = Vector2(1, 1)
 bone_name = "left_tibia"
@@ -75,9 +75,8 @@ debug_color = Color(0, 0.639216, 0.352941, 0.419608)
 
 [node name="right_tibia" type="SpineBoneNode" parent="Sprite"]
 show_behind_parent = true
-position = Vector2(-16.0491, -240.334)
+position = Vector2(-16.0488, -240.334)
 rotation = 1.66594
-scale = Vector2(1, 1)
 bone_name = "right_tibia"
 
 [node name="Area2D" type="Area2D" parent="Sprite/right_tibia"]
@@ -91,7 +90,6 @@ debug_color = Color(0.85098, 0.341176, 0.4, 0.419608)
 show_behind_parent = true
 position = Vector2(17.9087, -799.692)
 rotation = -1.58215
-scale = Vector2(1, 1)
 bone_name = "head"
 
 [node name="Area2D" type="Area2D" parent="Sprite/hitbox"]
@@ -123,6 +121,3 @@ visible = false
 position = Vector2(8, -240)
 shape = SubResource("RectangleShape2D_nm1qc")
 debug_color = Color(0.566151, 0.51516, 0.584586, 0.42)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(7, -261)

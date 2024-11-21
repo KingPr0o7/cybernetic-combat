@@ -40,9 +40,12 @@ texture = ExtResource("5_dxc4l")
 [node name="Stickman" parent="." instance=ExtResource("1_sfnuv")]
 z_as_relative = false
 position = Vector2(176, 923)
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.6, 0.6)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_kvqiv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0

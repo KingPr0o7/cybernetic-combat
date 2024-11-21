@@ -135,10 +135,10 @@ func input_listener(listener_state):
 			state = STATES.RUN_STOP
 		
 		# Expiermental Running + Jumping
-		#if Input.is_action_pressed("jump") and is_on_floor():
-		#	state = STATES.JUMPING
-		#	velocity.y = jump_speed
-		#	velocity.x = 50
+		if Input.is_action_pressed("jump") and is_on_floor():
+			state = STATES.JUMPING
+			velocity.y = jump_speed
+			velocity.x = 250 # Amount to deduct from RUN_SPEED
 
 	# JUMPING TO EITHER FALLING OR IDLE
 	elif listener_state == STATES.JUMPING:
@@ -191,8 +191,6 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and state != STATES.JUMPING:
 		velocity.x = 0
 
-	move_and_slide()
-
 	match state:
 		STATES.IDLE:
 			input_listener(STATES.IDLE)
@@ -238,6 +236,8 @@ func _physics_process(delta: float) -> void:
 		STATES.JABBING_SINGLES:
 			input_listener(STATES.JABBING_SINGLES)
 			play_animation(ANIMATIONS.jab_single, false, 0)
+
+	move_and_slide()
 
 	if state == STATES.IDLE:
 		state_word = "IDLE"
