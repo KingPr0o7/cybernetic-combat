@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var SPINE = $Sprite # SpineSprite Node
 @onready var STATE_INDICATOR = $Sprite/state_indicator 
+@onready var DIRECTION_INDICATOR = $Sprite/direction_indicator
 @onready var VELOCITY_INDICATOR = $Sprite/velocity_indicator
 
 @onready var hitbox = $Sprite/hip/hitbox_area/hitbox_coll
@@ -12,6 +13,10 @@ extends CharacterBody2D
 @onready var left_tibia = $Sprite/left_tibia/left_tibia_area/left_tibia_coll
 @onready var right_tibia = $Sprite/right_tibia/right_tibia_area/right_tibia_coll
 
+@export var state = STATES.IDLE # Send to Synchronizer 
+@export var current_animation = "" # Send to Synchronizer 
+
+@export var player_index = 0
 @export var gravity = 750
 @export var walk_speed = 400
 @export var run_speed = 600
@@ -56,8 +61,10 @@ const ANIMATIONS = {
 }
 
 enum STATES {IDLE, WALKING, RUNNING, JUMPING, FALLING, JABBING_SINGLES, KICKING, RUN_STOP, BLOCKING, HURT, DEAD} # State Initializer 
-var state = STATES.IDLE
-var current_animation = ""
+var current_direction = 1
+
+func _enter_tree():
+	set_multiplayer_authority(name.to_int()) # Set authority
 
 #
 # Animation Handlers
@@ -104,78 +111,82 @@ func input_listener(listener_state):
 	movement keys and other states (e.g., jumping) to determine the next state.
 	"""
 
-	# IDLE to WALKING
-	if listener_state == STATES.IDLE:
-		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-			state = STATES.WALKING
+	# Ensure authority
+	if is_multiplayer_authority():
 
-		if Input.is_action_pressed("punch"):
-			state = STATES.JABBING_SINGLES
+		# IDLE to WALKING
+		if listener_state == STATES.IDLE:
+			if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+				state = STATES.WALKING
 
-		if Input.is_action_pressed("block"):
-			state = STATES.BLOCKING
+			if Input.is_action_pressed("punch"):
+				state = STATES.JABBING_SINGLES
 
-		# Check if the jump key is pressed, they're on the floor
-		# and if they're not currently already jumping
-		if Input.is_action_pressed("jump") and is_on_floor() and state != STATES.JUMPING:
-			state = STATES.JUMPING
-			velocity.y = jump_speed
-		
-		# Check if their past apex
-		if !is_on_floor() and velocity.y > 0:
-			state = STATES.FALLING
+			if Input.is_action_pressed("block"):
+				state = STATES.BLOCKING
 
-	# WALKING TO RUNNING OR IDLE		
-	elif listener_state == STATES.WALKING:
-		if Input.is_action_pressed("sprint"):
-			state = STATES.RUNNING
-		if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
-			state = STATES.IDLE	
+			# Check if the jump key is pressed, they're on the floor
+			# and if they're not currently already jumping
+			if Input.is_action_pressed("jump") and is_on_floor() and state != STATES.JUMPING:
+				state = STATES.JUMPING
+				velocity.y = jump_speed
 
-		# Expiermental Walking + Jumping
-		if Input.is_action_pressed("jump") and is_on_floor():
-			state = STATES.JUMPING
-			velocity.y = jump_speed + 200
-			velocity.x = 200 # Amount to deduct from RUN_SPEED
+			# Check if their past apex
+			if !is_on_floor() and velocity.y > 0:
+				state = STATES.FALLING
 
-	# RUNNING TO IDLE
-	elif listener_state == STATES.RUNNING:
-		if !Input.is_action_pressed("sprint"):
-			state = STATES.IDLE
-		if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
-			state = STATES.RUN_STOP
-		
-		# Expiermental Running + Jumping
-		if Input.is_action_pressed("jump") and is_on_floor():
-			state = STATES.JUMPING
-			velocity.y = jump_speed
-			velocity.x = 250 # Amount to deduct from RUN_SPEED
+		# WALKING TO RUNNING OR IDLE		
+		elif listener_state == STATES.WALKING:
+			if Input.is_action_pressed("sprint"):
+				state = STATES.RUNNING
+			if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+				state = STATES.IDLE	
 
-	# JUMPING TO EITHER FALLING OR IDLE
-	elif listener_state == STATES.JUMPING:
-		if velocity.y > 0:
-			state = STATES.FALLING
+			# Walking + Jumping
+			if Input.is_action_pressed("jump") and is_on_floor():
+				state = STATES.JUMPING
+				velocity.y = jump_speed + 200
+				velocity.x = 200 # Amount to deduct from RUN_SPEED
 
-	elif listener_state == STATES.FALLING:
-		if is_on_floor():
-			state = STATES.IDLE
+		# RUNNING TO IDLE
+		elif listener_state == STATES.RUNNING:
+			if !Input.is_action_pressed("sprint"):
+				state = STATES.IDLE
+			if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+				if Input.is_action_pressed("sprint"):
+					state = STATES.RUN_STOP
 
-	elif listener_state == STATES.BLOCKING:
-		hitbox.disabled = true
+			# Running + Jumping
+			if Input.is_action_pressed("jump") and is_on_floor():
+				state = STATES.JUMPING
+				velocity.y = jump_speed
+				velocity.x = 250 # Amount to deduct from RUN_SPEED
 
-		if !Input.is_action_pressed("block"):
-			state = STATES.IDLE
-			hitbox.disabled = false
+		# JUMPING TO EITHER FALLING OR IDLE
+		elif listener_state == STATES.JUMPING:
+			if velocity.y > 0:
+				state = STATES.FALLING
 
-	# JABBING TO IDLE
-	elif listener_state == STATES.JABBING_SINGLES:
-		left_fist.disabled = false
+		elif listener_state == STATES.FALLING:
+			if is_on_floor():
+				state = STATES.IDLE
 
-		if Input.is_action_pressed("punch"):
-			state = STATES.JABBING_SINGLES
-		elif !Input.is_action_pressed("punch"):
-			left_fist.disabled = true
-			state = STATES.IDLE
+		elif listener_state == STATES.BLOCKING:
+			hitbox.disabled = true
+
+			if !Input.is_action_pressed("block"):
+				state = STATES.IDLE
+				hitbox.disabled = false
+
+		# JABBING TO IDLE
+		elif listener_state == STATES.JABBING_SINGLES:
+			left_fist.disabled = false
+
+			if Input.is_action_pressed("punch"):
+				state = STATES.JABBING_SINGLES
+			elif !Input.is_action_pressed("punch"):
+				left_fist.disabled = true
+				state = STATES.IDLE
 
 #
 # Physics Handlers
@@ -193,7 +204,8 @@ func bidirectional_velocity(direction: int, speed: int):
 	elif direction == -1:
 		velocity.x -= speed
 
-	SPINE.get_skeleton().set_scale_x(direction) # Flips the Stickman on the x-axis.
+	current_direction = direction
+	DIRECTION_INDICATOR.text = "[%s]" % str(current_direction)
 
 func _physics_process(delta: float) -> void:
 	"""
@@ -203,8 +215,13 @@ func _physics_process(delta: float) -> void:
 
 	velocity.y += gravity * delta
 
-	var right = Input.is_action_pressed("right")
-	var left = Input.is_action_pressed("left")
+	var right
+	var left
+
+	# Ensure authority
+	if is_multiplayer_authority():
+		right = Input.is_action_pressed("right")
+		left = Input.is_action_pressed("left")
 
 	var state_word = ""
 
@@ -263,6 +280,7 @@ func _physics_process(delta: float) -> void:
 			input_listener(STATES.JABBING_SINGLES)
 			play_animation(ANIMATIONS.jab_single, false, 0)
 
+	SPINE.get_skeleton().set_scale_x(current_direction) # Flips the Stickman on the x-axis.
 	move_and_slide()
 
 	if state == STATES.IDLE:
@@ -292,7 +310,6 @@ func _ready():
 
 	left_tibia.disabled = true
 	right_tibia.disabled = true
-	#$Sprite/AnimationPlayer.play("jab_single")
 
 func _on_hitbox_area_area_entered(area: Area2D) -> void:
 	if area == left_fist:
