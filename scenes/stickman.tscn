@@ -52,6 +52,9 @@ properties/9/replication_mode = 1
 properties/10/path = NodePath("Sprite/right_tibia/right_tibia_area/right_tibia_coll:disabled")
 properties/10/spawn = true
 properties/10/replication_mode = 1
+properties/11/path = NodePath("Sprite/player_id:text")
+properties/11/spawn = true
+properties/11/replication_mode = 1
 
 [node name="Stickman" type="CharacterBody2D"]
 show_behind_parent = true
@@ -75,8 +78,6 @@ rotation = -1.58415
 bone_name = "hip"
 
 [node name="hitbox_area" type="Area2D" parent="Sprite/hip" groups=["player"]]
-collision_layer = 2
-collision_mask = 0
 
 [node name="hitbox_coll" type="CollisionShape2D" parent="Sprite/hip/hitbox_area"]
 position = Vector2(71.0747, 3.96509)
@@ -90,6 +91,8 @@ scale = Vector2(1, 1)
 bone_name = "left_fist"
 
 [node name="left_fist_area" type="Area2D" parent="Sprite/left_fist"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="left_fist_coll" type="CollisionShape2D" parent="Sprite/left_fist/left_fist_area"]
 scale = Vector2(5, 5)
@@ -135,6 +138,16 @@ bone_name = "right_tibia"
 position = Vector2(105.184, -1.896)
 shape = SubResource("RectangleShape2D_lc3xu")
 debug_color = Color(0.85098, 0.341176, 0.4, 0.419608)
+
+[node name="player_id" type="Label" parent="Sprite"]
+offset_left = -310.39
+offset_top = -1311.53
+offset_right = 320.61
+offset_bottom = -1242.53
+text = "ID
+"
+label_settings = SubResource("LabelSettings_8h3n7")
+horizontal_alignment = 1
 
 [node name="state_indicator" type="Label" parent="Sprite"]
 offset_left = -86.6262

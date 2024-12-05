@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
+@onready var player = CharacterBody2D
+
 @onready var SPINE = $Sprite # SpineSprite Node
+@onready var PLAYER_ID = $Sprite/player_id
 @onready var STATE_INDICATOR = $Sprite/state_indicator 
 @onready var DIRECTION_INDICATOR = $Sprite/direction_indicator
 @onready var VELOCITY_INDICATOR = $Sprite/velocity_indicator
@@ -16,11 +19,12 @@ extends CharacterBody2D
 @export var state = STATES.IDLE # Send to Synchronizer 
 @export var current_animation = "" # Send to Synchronizer 
 
-@export var player_index = 0
 @export var gravity = 750
 @export var walk_speed = 400
 @export var run_speed = 600
 @export var jump_speed = -600
+
+@export var player_index = 0
 
 # All the available colors imported within the SpineSprite Node. 
 const COLORS = {
@@ -65,6 +69,7 @@ var current_direction = 1
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int()) # Set authority
+	player_index = name.to_int()
 
 #
 # Animation Handlers
@@ -121,7 +126,6 @@ func input_listener(listener_state):
 
 			if Input.is_action_just_pressed("punch"):
 				state = STATES.JABBING_SINGLES
-				await get_tree().create_timer(1.5).timeout
 
 			if Input.is_action_pressed("block"):
 				state = STATES.BLOCKING
@@ -183,12 +187,10 @@ func input_listener(listener_state):
 		elif listener_state == STATES.JABBING_SINGLES:
 			left_fist.disabled = false
 
-			if Input.is_action_just_pressed("punch"):
-				state = STATES.JABBING_SINGLES
-			elif !Input.is_action_just_pressed("punch"):
+			await get_tree().create_timer(0.25).timeout
+
+			if !Input.is_action_just_pressed("punch"):
 				state = STATES.IDLE
-				await get_tree().create_timer(0.5).timeout
-				left_fist.disabled = true
 
 #
 # Physics Handlers
@@ -235,6 +237,7 @@ func _physics_process(delta: float) -> void:
 		STATES.IDLE:
 			input_listener(STATES.IDLE)
 			play_animation(ANIMATIONS.idle, true, 0, true, 0.45)
+			left_fist.disabled = true
 
 		STATES.WALKING:
 			input_listener(STATES.WALKING)
@@ -275,7 +278,6 @@ func _physics_process(delta: float) -> void:
 
 		STATES.BLOCKING:
 			input_listener(STATES.BLOCKING)
-
 			play_animation(ANIMATIONS.block, false, 0)
 
 		STATES.JABBING_SINGLES:
@@ -313,6 +315,8 @@ func _ready():
 	left_tibia.disabled = true
 	right_tibia.disabled = true
 
-func _on_hitbox_area_area_entered(area:Area2D) -> void:
+	PLAYER_ID.text = "ID: %s" % player_index
+
+func _on_hitbox_area_area_entered(area: Area2D) -> void:
 	if area == left_fist.get_parent():
-		print("punched")
+		print("punched enemy")
