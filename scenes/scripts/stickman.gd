@@ -119,8 +119,9 @@ func input_listener(listener_state):
 			if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 				state = STATES.WALKING
 
-			if Input.is_action_pressed("punch"):
+			if Input.is_action_just_pressed("punch"):
 				state = STATES.JABBING_SINGLES
+				await get_tree().create_timer(1.5).timeout
 
 			if Input.is_action_pressed("block"):
 				state = STATES.BLOCKING
@@ -182,11 +183,12 @@ func input_listener(listener_state):
 		elif listener_state == STATES.JABBING_SINGLES:
 			left_fist.disabled = false
 
-			if Input.is_action_pressed("punch"):
+			if Input.is_action_just_pressed("punch"):
 				state = STATES.JABBING_SINGLES
-			elif !Input.is_action_pressed("punch"):
-				left_fist.disabled = true
+			elif !Input.is_action_just_pressed("punch"):
 				state = STATES.IDLE
+				await get_tree().create_timer(0.5).timeout
+				left_fist.disabled = true
 
 #
 # Physics Handlers
@@ -311,6 +313,6 @@ func _ready():
 	left_tibia.disabled = true
 	right_tibia.disabled = true
 
-func _on_hitbox_area_area_entered(area: Area2D) -> void:
-	if area == left_fist:
-		hitbox.disabled = true
+func _on_hitbox_area_area_entered(area:Area2D) -> void:
+	if area == left_fist.get_parent():
+		print("punched")

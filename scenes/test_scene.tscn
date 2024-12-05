@@ -61,6 +61,7 @@ flat = true
 
 [node name="Join" type="Button" parent="Background/Buttons/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("6_gs3d1")
 flat = true
 
