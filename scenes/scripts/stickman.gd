@@ -396,4 +396,11 @@ func _ready():
 
 # Any fist or tibia that enters the hurtbox
 func _on_hurtbox_area_area_entered(area: Area2D) -> void:
-	print(area)
+	if area.is_in_group("hitbox"):
+		print(get_path())
+		print(area.get_path())
+
+func _on_hurtbox_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("hitbox"):
+		print(get_path())
+		print(area.get_path())

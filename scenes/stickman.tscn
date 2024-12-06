@@ -190,3 +190,4 @@ debug_color = Color(0.568152, 0.556904, 0, 0.42)
 replication_config = SubResource("SceneReplicationConfig_gttjx")
 
 [connection signal="area_entered" from="Sprite/hip/hurtbox_area" to="." method="_on_hurtbox_area_area_entered"]
+[connection signal="area_exited" from="Sprite/hip/hurtbox_area" to="." method="_on_hurtbox_area_area_exited"]
