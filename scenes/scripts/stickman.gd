@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var DIRECTION_INDICATOR = $Sprite/direction_indicator
 @onready var VELOCITY_INDICATOR = $Sprite/velocity_indicator
 
-@onready var hitbox = $Sprite/hip/hitbox_area/hitbox_coll
+@onready var hurtbox = $Sprite/hip/hurtbox_area/hurtbox_coll
 
 @onready var left_fist = $Sprite/left_fist/left_fist_area/left_fist_coll
 @onready var right_fist = $Sprite/right_fist/right_fist_area/right_fist_coll
@@ -93,6 +93,25 @@ func play_animation(animation_name: String, loop: bool, track: int, additive: bo
 			assert(delay > 0.00, "Animation player cannot have a delay of: %sms. It has to be greater than 0.00ms." % delay)
 			SPINE.get_animation_state().add_animation(animation_name, delay, loop, track)
 
+func hitboxes_toggle(_sprite: SpineSprite, _animation_state: SpineAnimationState, track_entry: SpineTrackEntry) -> void:
+	"""
+	With the anatomy of the Stickman, he has hitboxes and a hurtbox attached to him at all times,
+	no matter the animation. For damage protection, all hitboxes are disabled on load. However,
+	with certain animations, the hitboxes need to be dynamically enabled then disabled. So,
+	this function tracks and toggles hitboxes when the animation ends.
+	"""
+	
+	var animation_name = track_entry.get_animation().get_name()
+	
+	if animation_name == ANIMATIONS.jab_single:
+		SPINE.disconnect("animation_completed", Callable(self, "hitboxes_toggle"))
+		left_fist.disabled = true
+		right_fist.disabled = true
+
+		left_tibia.disabled = true
+		right_tibia.disabled = true
+		state = STATES.IDLE
+	
 func set_skin(color: String):
 	"""
 	Set's the stickman's skin color for the player. There is a set of 12
@@ -101,6 +120,50 @@ func set_skin(color: String):
 
 	var skin = SPINE.get_skeleton().get_data().find_skin(color)
 	SPINE.get_skeleton().set_skin(skin)
+
+#
+# Collider Handler
+#	With the default Godot editor settings of a Stickman, the hurtbox is layer 1, and the
+#	hitboxes are layer 2. With that, the other player needs to have these switched, as to not
+#	punch themselves and deal damage to the other player's hurtbox (if modes beyond 1v1, edit
+#	this function and change the layering logic).
+#
+
+func swap_collisions(node):
+	"""
+	(ONLY ACCOUNTS FOR 1v1 mode), flips both the collision layer and mask to align with
+	assigned enemy's numbers (without hitting itself and doing damage to them).
+	"""
+
+	if node == hurtbox.get_parent():
+		node.set_collision_layer_value(1, false)
+		node.set_collision_mask_value(1, false)
+
+		node.set_collision_layer_value(2, true)
+		node.set_collision_mask_value(2, true)
+	else:
+		node.set_collision_layer_value(2, false)
+		node.set_collision_mask_value(2, false)
+
+		node.set_collision_layer_value(1, true)
+		node.set_collision_mask_value(1, true)
+
+func apply_collisions():
+	"""
+	Take both the hurtbox and the hitbox's area (Collision2D parent), and swap the 
+	collision layer and mask numbers.
+	"""
+
+	var nodes = [
+		hurtbox.get_parent(),
+		left_fist.get_parent(),
+		right_fist.get_parent(),
+		left_tibia.get_parent(),
+		right_tibia.get_parent()
+	]
+
+	for node in nodes:
+		swap_collisions(node)
 
 #
 # Input to State Interpreter
@@ -177,20 +240,19 @@ func input_listener(listener_state):
 				state = STATES.IDLE
 
 		elif listener_state == STATES.BLOCKING:
-			hitbox.disabled = true
+			hurtbox.disabled = true
 
 			if !Input.is_action_pressed("block"):
 				state = STATES.IDLE
-				hitbox.disabled = false
+				hurtbox.disabled = false
 
 		# JABBING TO IDLE
 		elif listener_state == STATES.JABBING_SINGLES:
-			left_fist.disabled = false
+			left_fist.disabled = false;
 
-			await get_tree().create_timer(0.25).timeout
-
-			if !Input.is_action_just_pressed("punch"):
-				state = STATES.IDLE
+			# Disable hitboxes when animation has completed
+			if not SPINE.is_connected("animation_completed", Callable(self, "hitboxes_toggle")):
+				SPINE.connect("animation_completed", Callable(self, "hitboxes_toggle"))
 
 #
 # Physics Handlers
@@ -237,7 +299,6 @@ func _physics_process(delta: float) -> void:
 		STATES.IDLE:
 			input_listener(STATES.IDLE)
 			play_animation(ANIMATIONS.idle, true, 0, true, 0.45)
-			left_fist.disabled = true
 
 		STATES.WALKING:
 			input_listener(STATES.WALKING)
@@ -308,6 +369,13 @@ func _physics_process(delta: float) -> void:
 	VELOCITY_INDICATOR.text = "(%s, %d)" % [velocity.x, velocity.y]
 
 func _ready():
+	"""
+	Sets game up, starting with player 1, and then the enemy, after
+	it has loaded. Consisting of collision handling and skin customization. 
+	"""
+
+	PLAYER_ID.text = "ID: %s" % player_index
+
 	set_skin(COLORS.crimsonite)
 	left_fist.disabled = true
 	right_fist.disabled = true
@@ -315,8 +383,17 @@ func _ready():
 	left_tibia.disabled = true
 	right_tibia.disabled = true
 
-	PLAYER_ID.text = "ID: %s" % player_index
+	if player_index > 1:
+		set_skin(COLORS.deepwave)
+		apply_collisions()
 
-func _on_hitbox_area_area_entered(area: Area2D) -> void:
-	if area == left_fist.get_parent():
-		print("punched enemy")
+#
+# Signals 
+#	Event listeners that are tied to the Stickman,
+#	mostly dealing with damage, deaths, and other combat 
+#	mechanics. 
+#
+
+# Any fist or tibia that enters the hurtbox
+func _on_hurtbox_area_area_entered(area: Area2D) -> void:
+	print(area)

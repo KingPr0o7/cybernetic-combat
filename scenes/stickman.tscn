@@ -37,22 +37,22 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath("Sprite/direction_indicator:text")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath("Sprite/hip/hitbox_area/hitbox_coll:disabled")
+properties/6/path = NodePath("Sprite/left_fist/left_fist_area/left_fist_coll:disabled")
 properties/6/spawn = true
 properties/6/replication_mode = 1
-properties/7/path = NodePath("Sprite/left_fist/left_fist_area/left_fist_coll:disabled")
+properties/7/path = NodePath("Sprite/right_fist/right_fist_area/right_fist_coll:disabled")
 properties/7/spawn = true
 properties/7/replication_mode = 1
-properties/8/path = NodePath("Sprite/right_fist/right_fist_area/right_fist_coll:disabled")
+properties/8/path = NodePath("Sprite/left_tibia/left_tibia_area/left_tibia_coll:disabled")
 properties/8/spawn = true
 properties/8/replication_mode = 1
-properties/9/path = NodePath("Sprite/left_tibia/left_tibia_area/left_tibia_coll:disabled")
+properties/9/path = NodePath("Sprite/right_tibia/right_tibia_area/right_tibia_coll:disabled")
 properties/9/spawn = true
 properties/9/replication_mode = 1
-properties/10/path = NodePath("Sprite/right_tibia/right_tibia_area/right_tibia_coll:disabled")
+properties/10/path = NodePath("Sprite/player_id:text")
 properties/10/spawn = true
 properties/10/replication_mode = 1
-properties/11/path = NodePath("Sprite/player_id:text")
+properties/11/path = NodePath("Sprite/hip/hurtbox_area/hurtbox_coll:disabled")
 properties/11/spawn = true
 properties/11/replication_mode = 1
 
@@ -77,9 +77,9 @@ position = Vector2(19.0881, -464.416)
 rotation = -1.58415
 bone_name = "hip"
 
-[node name="hitbox_area" type="Area2D" parent="Sprite/hip" groups=["player"]]
+[node name="hurtbox_area" type="Area2D" parent="Sprite/hip" groups=["hurtbox"]]
 
-[node name="hitbox_coll" type="CollisionShape2D" parent="Sprite/hip/hitbox_area"]
+[node name="hurtbox_coll" type="CollisionShape2D" parent="Sprite/hip/hurtbox_area"]
 position = Vector2(71.0747, 3.96509)
 shape = SubResource("RectangleShape2D_48o4g")
 
@@ -90,7 +90,7 @@ rotation = -0.0699567
 scale = Vector2(1, 1)
 bone_name = "left_fist"
 
-[node name="left_fist_area" type="Area2D" parent="Sprite/left_fist"]
+[node name="left_fist_area" type="Area2D" parent="Sprite/left_fist" groups=["hitbox"]]
 collision_layer = 2
 collision_mask = 2
 
@@ -105,7 +105,9 @@ position = Vector2(-366.505, -750.413)
 rotation = -3.11351
 bone_name = "right_fist"
 
-[node name="right_fist_area" type="Area2D" parent="Sprite/right_fist"]
+[node name="right_fist_area" type="Area2D" parent="Sprite/right_fist" groups=["hitbox"]]
+collision_layer = 2
+collision_mask = 2
 
 [node name="right_fist_coll" type="CollisionShape2D" parent="Sprite/right_fist/right_fist_area"]
 scale = Vector2(5, 5)
@@ -119,7 +121,9 @@ rotation = 1.46138
 scale = Vector2(1, 1)
 bone_name = "left_tibia"
 
-[node name="left_tibia_area" type="Area2D" parent="Sprite/left_tibia"]
+[node name="left_tibia_area" type="Area2D" parent="Sprite/left_tibia" groups=["hitbox"]]
+collision_layer = 2
+collision_mask = 2
 
 [node name="left_tibia_coll" type="CollisionShape2D" parent="Sprite/left_tibia/left_tibia_area"]
 position = Vector2(91.4817, -11.8447)
@@ -132,7 +136,9 @@ position = Vector2(-16.0491, -240.334)
 rotation = 1.66594
 bone_name = "right_tibia"
 
-[node name="right_tibia_area" type="Area2D" parent="Sprite/right_tibia"]
+[node name="right_tibia_area" type="Area2D" parent="Sprite/right_tibia" groups=["hitbox"]]
+collision_layer = 2
+collision_mask = 2
 
 [node name="right_tibia_coll" type="CollisionShape2D" parent="Sprite/right_tibia/right_tibia_area"]
 position = Vector2(105.184, -1.896)
@@ -183,4 +189,4 @@ debug_color = Color(0.568152, 0.556904, 0, 0.42)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_gttjx")
 
-[connection signal="area_entered" from="Sprite/hip/hitbox_area" to="." method="_on_hitbox_area_area_entered"]
+[connection signal="area_entered" from="Sprite/hip/hurtbox_area" to="." method="_on_hurtbox_area_area_entered"]
