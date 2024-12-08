@@ -23,6 +23,7 @@ extends CharacterBody2D
 @export var walk_speed = 400
 @export var run_speed = 600
 @export var jump_speed = -600
+@export_range(0, 100) var health = 100
 
 @export var player_index = 0
 
@@ -110,7 +111,12 @@ func hitboxes_toggle(_sprite: SpineSprite, _animation_state: SpineAnimationState
 
 		left_tibia.disabled = true
 		right_tibia.disabled = true
-		state = STATES.IDLE
+	elif animation_name == ANIMATIONS.hurt:
+		SPINE.disconnect("animation_completed", Callable(self, "hitboxes_toggle"))
+
+		hurtbox.disabled = false
+	
+	state = STATES.IDLE
 	
 func set_skin(color: String):
 	"""
@@ -246,6 +252,12 @@ func input_listener(listener_state):
 				state = STATES.IDLE
 				hurtbox.disabled = false
 
+		elif listener_state == STATES.HURT:
+			hurtbox.disabled = true
+
+			if not SPINE.is_connected("animation_completed", Callable(self, "hitboxes_toggle")):
+				SPINE.connect("animation_completed", Callable(self, "hitboxes_toggle"))
+
 		# JABBING TO IDLE
 		elif listener_state == STATES.JABBING_SINGLES:
 			left_fist.disabled = false;
@@ -341,6 +353,10 @@ func _physics_process(delta: float) -> void:
 			input_listener(STATES.BLOCKING)
 			play_animation(ANIMATIONS.block, false, 0)
 
+		STATES.HURT:
+			input_listener(STATES.HURT)
+			play_animation(ANIMATIONS.hurt, false, 0)
+
 		STATES.JABBING_SINGLES:
 			input_listener(STATES.JABBING_SINGLES)
 			play_animation(ANIMATIONS.jab_single, false, 0)
@@ -362,6 +378,8 @@ func _physics_process(delta: float) -> void:
 		state_word = "RUNNING STOPPING"
 	elif state == STATES.BLOCKING:
 		state_word = "BLOCKING"
+	elif state == STATES.HURT:
+		state_word = "HURT"
 	elif state == STATES.JABBING_SINGLES:
 		state_word = "JABBING (SINGLES)"
 
@@ -397,10 +415,7 @@ func _ready():
 # Any fist or tibia that enters the hurtbox
 func _on_hurtbox_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hitbox"):
-		print(get_path())
-		print(area.get_path())
+		state = STATES.HURT
 
-func _on_hurtbox_area_area_exited(area: Area2D) -> void:
-	if area.is_in_group("hitbox"):
-		print(get_path())
-		print(area.get_path())
+		if area == left_fist.get_parent():
+			health -= 0.8

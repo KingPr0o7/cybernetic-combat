@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://baqkcg5s0h127"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dlsd1sidxft8k" path="res://sprites/Stickman/stickman.tres" id="1_s1jqn"]
+[ext_resource type="Script" path="res://scenes/scripts/dummy.gd" id="2_1kqdu"]
+
+[node name="Dummy" type="SpineSprite"]
+position = Vector2(933, 770)
+scale = Vector2(0.4, 0.416)
+skeleton_data_res = ExtResource("1_s1jqn")
+preview_skin = "graphite"
+preview_animation = "idle"
+preview_frame = false
+preview_time = 0.0
+script = ExtResource("2_1kqdu")

@@ -25,6 +25,10 @@ window/stretch/aspect="ignore"
 
 project/assembly_name="Cybernetic Combat"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [input]
 
 left={
@@ -66,3 +70,7 @@ block={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
+
+[svgsprite]
+
+compress=false

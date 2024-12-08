@@ -1,0 +1,144 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpnorajeqtk13"]
+
+[ext_resource type="Script" path="res://scenes/scripts/hud.gd" id="1_nf6ga"]
+[ext_resource type="Texture2D" uid="uid://blxo2msm8yr16" path="res://sprites/ui/status_bar.png" id="2_le822"]
+[ext_resource type="PackedScene" uid="uid://baqkcg5s0h127" path="res://scenes/dummy.tscn" id="3_oevu7"]
+[ext_resource type="Texture2D" uid="uid://b7b10pl62k8ec" path="res://sprites/ui/player_under.png" id="4_yrcea"]
+[ext_resource type="Texture2D" uid="uid://xwj0ds58j24j" path="res://sprites/ui/player_progress.png" id="5_jxyvx"]
+[ext_resource type="Texture2D" uid="uid://d02wskh67kfpu" path="res://sprites/ui/enemy_under.png" id="6_kwsrr"]
+[ext_resource type="Texture2D" uid="uid://chh30qt6tngg7" path="res://sprites/ui/enemy_progress.png" id="7_0ifty"]
+[ext_resource type="FontFile" uid="uid://dbcl6yjtva084" path="res://sprites/ui/SairaStencilOne-Regular.ttf" id="8_bp27s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4gpq4"]
+font = ExtResource("8_bp27s")
+font_size = 50
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_nf6ga")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 250.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(1000, 0)
+
+[node name="status_bar" type="Control" parent="MarginContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="background" type="TextureRect" parent="MarginContainer/status_bar"]
+layout_mode = 0
+offset_left = 72.5
+offset_right = 1774.5
+offset_bottom = 243.0
+texture = ExtResource("2_le822")
+
+[node name="player_preview" type="Control" parent="MarginContainer/status_bar"]
+clip_contents = true
+anchors_preset = 0
+offset_left = 74.0
+offset_top = 1.0
+offset_right = 315.0
+offset_bottom = 242.0
+
+[node name="player_dummy" parent="MarginContainer/status_bar/player_preview" instance=ExtResource("3_oevu7")]
+position = Vector2(123, 467.5)
+preview_skin = "cerulia"
+
+[node name="player_health" type="TextureProgressBar" parent="MarginContainer/status_bar"]
+clip_contents = true
+layout_mode = 0
+offset_left = 72.5
+offset_right = 914.5
+offset_bottom = 243.0
+value = 100.0
+fill_mode = 1
+texture_under = ExtResource("4_yrcea")
+texture_progress = ExtResource("5_jxyvx")
+
+[node name="enemy_preview" type="Control" parent="MarginContainer/status_bar"]
+clip_contents = true
+anchors_preset = 0
+offset_left = 1540.0
+offset_top = 15.0
+offset_right = 1760.0
+offset_bottom = 227.0
+
+[node name="enemy_dummy" parent="MarginContainer/status_bar/enemy_preview" instance=ExtResource("3_oevu7")]
+position = Vector2(123, 467.5)
+preview_skin = "crimsonite"
+direction = -1
+
+[node name="enemy_health" type="TextureProgressBar" parent="MarginContainer/status_bar"]
+layout_mode = 0
+offset_left = 932.5
+offset_right = 1774.5
+offset_bottom = 243.0
+value = 100.0
+texture_under = ExtResource("6_kwsrr")
+texture_progress = ExtResource("7_0ifty")
+
+[node name="player_username" type="Label" parent="MarginContainer/status_bar"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 55.0
+offset_right = 842.0
+offset_bottom = 190.0
+text = "KingPr0o7"
+label_settings = SubResource("LabelSettings_4gpq4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemy_username" type="Label" parent="MarginContainer/status_bar"]
+layout_mode = 0
+offset_left = 1007.92
+offset_top = 55.0
+offset_right = 1533.92
+offset_bottom = 190.0
+text = "Ninja_Talon"
+label_settings = SubResource("LabelSettings_4gpq4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="heal_king" type="Button" parent="."]
+offset_left = 561.0
+offset_top = 214.0
+offset_right = 642.0
+offset_bottom = 245.0
+text = "Heal King"
+
+[node name="hurt_king" type="Button" parent="."]
+offset_left = 561.0
+offset_top = 266.0
+offset_right = 643.0
+offset_bottom = 297.0
+text = "Hurt King"
+
+[node name="hurt_talon" type="Button" parent="."]
+offset_left = 1259.0
+offset_top = 266.0
+offset_right = 1350.0
+offset_bottom = 297.0
+text = "Hurt Talon"
+
+[node name="heal_talon" type="Button" parent="."]
+offset_left = 1261.0
+offset_top = 210.0
+offset_right = 1351.0
+offset_bottom = 241.0
+text = "Heal Talon"
+
+[node name="reset" type="Button" parent="."]
+offset_left = 900.0
+offset_top = 303.0
+offset_right = 991.0
+offset_bottom = 334.0
+text = "Reset"
+
+[connection signal="pressed" from="heal_king" to="." method="_on_heal_king_pressed"]
+[connection signal="pressed" from="hurt_king" to="." method="_on_hurt_king_pressed"]
+[connection signal="pressed" from="hurt_talon" to="." method="_on_hurt_talon_pressed"]
+[connection signal="pressed" from="heal_talon" to="." method="_on_heal_talon_pressed"]
+[connection signal="pressed" from="reset" to="." method="_on_reset_pressed"]
