@@ -25,10 +25,6 @@ window/stretch/aspect="ignore"
 
 project/assembly_name="Cybernetic Combat"
 
-[editor_plugins]
-
-enabled=PackedStringArray()
-
 [input]
 
 left={

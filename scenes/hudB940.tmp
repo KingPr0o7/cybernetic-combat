@@ -1,18 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpnorajeqtk13"]
+[gd_scene load_steps=10 format=3 uid="uid://cpnorajeqtk13"]
 
 [ext_resource type="Script" path="res://scenes/scripts/hud.gd" id="1_nf6ga"]
+[ext_resource type="Script" path="res://addons/TextureRectRounded/TextureRectRounded.gd" id="2_enqjn"]
 [ext_resource type="Texture2D" uid="uid://blxo2msm8yr16" path="res://sprites/ui/status_bar.png" id="2_le822"]
 [ext_resource type="PackedScene" uid="uid://baqkcg5s0h127" path="res://scenes/dummy.tscn" id="3_oevu7"]
 [ext_resource type="Texture2D" uid="uid://xwj0ds58j24j" path="res://sprites/ui/player_progress_bar/player_progress.png" id="4_tyl8i"]
 [ext_resource type="Texture2D" uid="uid://chh30qt6tngg7" path="res://sprites/ui/enemy_progress_bar/enemy_progress.png" id="5_yfkiq"]
 [ext_resource type="FontFile" uid="uid://dbcl6yjtva084" path="res://sprites/ui/SairaStencilOne-Regular.ttf" id="8_bp27s"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccaxk"]
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-corner_detail = 7
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bdhp"]
+corner_radius_top_left = 38
+corner_radius_top_right = 38
+corner_radius_bottom_right = 38
+corner_radius_bottom_left = 38
+corner_detail = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_4gpq4"]
 font = ExtResource("8_bp27s")
@@ -33,43 +34,47 @@ pivot_offset = Vector2(1000, 0)
 clip_contents = true
 layout_mode = 2
 
-[node name="background_container" type="Panel" parent="MarginContainer/status_bar"]
+[node name="background" type="Panel" parent="MarginContainer/status_bar"]
 clip_children = 1
-clip_contents = true
 layout_mode = 0
 offset_left = 73.0
 offset_right = 1776.0
 offset_bottom = 244.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ccaxk")
-
-[node name="background" type="TextureRect" parent="MarginContainer/status_bar/background_container"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0bdhp")
+script = ExtResource("2_enqjn")
+corner_detail = 20
+radius_bottom_left = 38
+radius_bottom_right = 38
+radius_top_left = 38
+radius_top_right = 38
 texture = ExtResource("2_le822")
+anti_aliasing = true
 
-[node name="enemy_preview" type="Control" parent="MarginContainer/status_bar/background_container"]
+[node name="player_preview" type="Control" parent="MarginContainer/status_bar/background"]
+clip_contents = true
+layout_mode = 2
+anchors_preset = 0
+offset_right = 242.0
+offset_bottom = 242.0
+
+[node name="player_dummy" parent="MarginContainer/status_bar/background/player_preview" instance=ExtResource("3_oevu7")]
+z_index = 1
+position = Vector2(124.5, 465)
+preview_skin = "cerulia"
+preview_animation = "hurt"
+
+[node name="enemy_preview" type="Control" parent="MarginContainer/status_bar/background"]
 clip_contents = true
 anchors_preset = 0
 offset_left = 1459.0
 offset_right = 1702.0
 offset_bottom = 242.0
 
-[node name="enemy_dummy" parent="MarginContainer/status_bar/background_container/enemy_preview" instance=ExtResource("3_oevu7")]
+[node name="enemy_dummy" parent="MarginContainer/status_bar/background/enemy_preview" instance=ExtResource("3_oevu7")]
+z_index = 1
 position = Vector2(123, 467.5)
 preview_skin = "crimsonite"
 direction = -1
-
-[node name="player_preview" type="Control" parent="MarginContainer/status_bar/background_container"]
-clip_contents = true
-layout_mode = 2
-anchors_preset = 0
-offset_right = 242.0
-offset_bottom = 243.0
-
-[node name="player_dummy" parent="MarginContainer/status_bar/background_container/player_preview" instance=ExtResource("3_oevu7")]
-position = Vector2(124.5, 465)
-preview_skin = "cerulia"
 
 [node name="player_health" type="TextureProgressBar" parent="MarginContainer/status_bar"]
 z_index = 2
@@ -78,7 +83,7 @@ layout_mode = 0
 offset_left = 73.0
 offset_right = 915.0
 offset_bottom = 244.0
-value = 100.0
+value = 91.0
 fill_mode = 1
 texture_progress = ExtResource("4_tyl8i")
 

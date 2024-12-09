@@ -6,8 +6,8 @@ var talon_health = 100
 @onready var player_health = $MarginContainer/status_bar/player_health
 @onready var enemy_health = $MarginContainer/status_bar/enemy_health
 
-@onready var player_dummy = $MarginContainer/status_bar/player_preview/player_dummy
-@onready var enemy_dummy = $MarginContainer/status_bar/enemy_preview/enemy_dummy
+@onready var player_dummy = $MarginContainer/status_bar/background_container/player_preview/player_dummy
+@onready var enemy_dummy = $MarginContainer/status_bar/background_container/enemy_preview/enemy_dummy
 
 var player_progress = preload("res://sprites/ui/player_progress_bar/player_progress.png")
 var enemy_progress = preload("res://sprites/ui/enemy_progress_bar/enemy_progress.png")
@@ -54,6 +54,14 @@ const ANIMATIONS = {
 }
 
 func extreme_health_bar(toggled, health_bar, new_texture, id):
+	"""
+	Due to the corner radius of my health bar, and quite odd shape, the health bar needs
+	to be modified after a tween, at the end to maintain a outline-like path. To do this, 
+	the health bar has its min_value, fill_mode, exponential_edit, and rounded properties 
+	triggered to allow the health bar to go quicker at smaller values 
+	(as the health bar is quite large).
+	"""
+
 	# LEFT -> RIGHT: 0
 	# RIGHT -> LEFT: 1
 	# TOP -> BOTTOM: 2
@@ -74,65 +82,96 @@ func extreme_health_bar(toggled, health_bar, new_texture, id):
 		health_bar.texture_progress = new_texture
 
 		if id == 1:
-			health_bar.fill_mode = 1
+			health_bar.fill_mode = 1 # RIGHT -> LEFT
 		else: 
-			health_bar.fill_mode = 0
+			health_bar.fill_mode = 0 # LEFT -> RIGHT
 
 		health_bar.min_value = 1
 		health_bar.rounded = false
 		health_bar.exp_edit = false
 
-	#print(health_bar.min_value, health_bar.rounded, health_bar.exp_edit, health_bar.fill_mode)
-
 func update_health(id, wanted_health):
+	"""
+	To make the health bar dynamic and smooth, we establish the current target,
+	and then trigger things based of the wanted_health and the health bar's current
+	value. When the health bar reaches the point where it looks odd 
+	(going towards the center, instead to the middle of KO), we switch the health bar's
+	properties to go up and down (bi-linearly). 
+	"""
+
 	var health_bar
 	var progress
 	var progress_extreme
+	var dummy
 
+	# Target Insurance
 	if id == 1:
 		health_bar = player_health
 		progress = player_progress
 		progress_extreme = player_progress_extreme
+		dummy = player_dummy
 	else:
 		health_bar = enemy_health
 		progress = enemy_progress
 		progress_extreme = enemy_progress_extreme
+		dummy = enemy_dummy
 
+	# Dummy Animation Player
+	if wanted_health < health_bar.value:
+		dummy.play_animation(ANIMATIONS.hurt, false, 0)
+		dummy.play_animation(ANIMATIONS.idle, true, 0, false, true, 0.45)
+	elif health_bar.value <= health_bar.min_value:
+		dummy.play_animation(ANIMATIONS.die_behind, false, 0, true, true, 0)
+		dummy.play_animation(ANIMATIONS.idle, true, 0, false, true, 0.8)
+	else:
+		dummy.play_animation(ANIMATIONS.idle, true, 0, false, true, 0.45)
+		# New healing animation 👀
+
+	# Health Gained
 	if wanted_health > 2:
+		# If not heading towards weird spot
 		if health_bar.texture_progress == progress:
 			var tween = get_tree().create_tween()
 			tween.tween_property(health_bar, "value", wanted_health, 0.2).set_trans(Tween.TRANS_LINEAR)
 		else:
-			var tween = get_tree().create_tween()
-			tween.tween_property(health_bar, "value", 3, 0.2).set_trans(Tween.TRANS_LINEAR)
+			var break_point = get_tree().create_tween()
+			# Set it to the last value before (to not look ugly)
+			break_point.tween_property(health_bar, "value", 3, 0.2).set_trans(Tween.TRANS_LINEAR)
 			extreme_health_bar(true, health_bar, progress_extreme, id)
-			await get_tree().create_timer(0.2).timeout
+
+			break_point.stop()
+
+			# Then switch to left and right and go as normal
 			extreme_health_bar(false, health_bar, progress, id)
 
-			tween.stop()
-			var tween2 = get_tree().create_tween()
-
-			tween2.tween_property(health_bar, "value", wanted_health, 0.2).set_trans(Tween.TRANS_LINEAR)
-
+			var zero = get_tree().create_tween()
+			zero.tween_property(health_bar, "value", wanted_health, 0.2).set_trans(Tween.TRANS_LINEAR)
+	# Health Lost
 	else:
-		var tween = get_tree().create_tween()
-		tween.tween_property(health_bar, "value", 3, 0.4).set_trans(Tween.TRANS_LINEAR)
+		# Set it to the last value before (to not look ugly)
+		var break_point = get_tree().create_tween()
+		break_point.tween_property(health_bar, "value", 3, 0.4).set_trans(Tween.TRANS_LINEAR)
 		await get_tree().create_timer(0.4).timeout
 		extreme_health_bar(true, health_bar, progress_extreme, id)
 	
-		tween.stop()
+		break_point.stop()
 
-		tween.tween_property(health_bar, "value", 0, 0.2).set_trans(Tween.TRANS_LINEAR)
-		await get_tree().create_timer(0.2).timeout
-		health_bar.min_value = 0
-		health_bar.value = 0
+		# Then switch to top and bottom and go to KO
+		var zero = get_tree().create_tween()
+
+		if wanted_health <= 0:
+			zero.tween_property(health_bar, "value", health_bar.min_value, 0.2).set_trans(Tween.TRANS_LINEAR)
+			# Emit Death Signal Here
+			dummy.play_animation(ANIMATIONS.die_behind, false, 0)
 
 func _ready():
-	player_dummy.set_skin(COLORS.cerulia)
-	player_dummy.play_animation(ANIMATIONS.idle, true, 0)
+	if player_dummy != null:
+		player_dummy.set_skin(COLORS.cerulia)
+		player_dummy.play_animation(ANIMATIONS.idle, true, 0)
 
-	enemy_dummy.set_skin(COLORS.crimsonite)
-	enemy_dummy.play_animation(ANIMATIONS.idle, true, 0)
+	if enemy_dummy != null:
+		enemy_dummy.set_skin(COLORS.crimsonite)
+		enemy_dummy.play_animation(ANIMATIONS.idle, true, 0)
 
 func _on_hurt_king_pressed() -> void:
 	king_health -= 25
