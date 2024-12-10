@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://b466cv8bs2t4n"]
+
+[ext_resource type="Script" path="res://scenes/scripts/cursor.gd" id="1_0543l"]
+[ext_resource type="Texture2D" uid="uid://dqu5sgo8a7wo3" path="res://sprites/ui/cursor.png" id="1_kp36e"]
+[ext_resource type="FontFile" uid="uid://bj6ifq6mos0b4" path="res://sprites/ui/cursor_font.ttf" id="3_l6jug"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_guffa"]
+font = ExtResource("3_l6jug")
+font_size = 25
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1.05, 3.64)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4k7bv"]
+properties/0/path = NodePath("username:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("username:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("sprite:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="cursor" type="Node2D"]
+position = Vector2(763, 446)
+script = ExtResource("1_0543l")
+cursor_index = null
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_kp36e")
+
+[node name="username" type="Label" parent="."]
+offset_left = 12.0
+offset_top = -35.0
+offset_right = 138.0
+offset_bottom = 5.0
+text = "username"
+label_settings = SubResource("LabelSettings_guffa")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4k7bv")

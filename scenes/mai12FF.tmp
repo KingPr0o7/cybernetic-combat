@@ -122,15 +122,32 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -219.5
-offset_top = -68.0
+offset_top = 40.66
 offset_right = 219.5
-offset_bottom = 68.0
+offset_bottom = 176.66
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("10_jop15")
 theme_override_font_sizes/font_size = 81
 text = "Join 135"
+
+[node name="username" type="TextEdit" parent="all_menus/networking"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -22.0
+offset_right = 67.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 3
+placeholder_text = "Enter in user name"
 
 [node name="menu_name" type="TextureRect" parent="all_menus/networking"]
 layout_mode = 1
@@ -149,10 +166,9 @@ spawn_path = NodePath("..")
 
 [node name="character_selector" type="Control" parent="all_menus"]
 anchors_preset = 0
-offset_left = 3864.0
-offset_top = -27.0
-offset_right = 5784.0
-offset_bottom = 1053.0
+offset_left = 3840.0
+offset_right = 5760.0
+offset_bottom = 1080.0
 
 [node name="map_selector" type="Control" parent="all_menus"]
 anchors_preset = 0

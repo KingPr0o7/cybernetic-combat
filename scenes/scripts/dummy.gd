@@ -34,8 +34,6 @@ func play_animation(animation_name: String, loop: bool, track: int, reverse: boo
 			
 			track_entry.set_reverse(true)
 
-
-
 func set_skin(color: String):
 	"""
 	Set's the stickman's skin color for the player. There is a set of 12
