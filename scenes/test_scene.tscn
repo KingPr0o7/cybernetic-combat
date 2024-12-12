@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://d0gbki7dvueo3" path="res://backgrounds/indiana/4_sky.png" id="2_wpad5"]
 [ext_resource type="Texture2D" uid="uid://bnqcslgkxlaal" path="res://backgrounds/indiana/3_clouds.png" id="3_rnydp"]
 [ext_resource type="Texture2D" uid="uid://mvas66x038ik" path="res://backgrounds/indiana/2_rolling_hills.png" id="4_2smqi"]
-[ext_resource type="Texture2D" uid="uid://d3uotb33cl631" path="res://sprites/ui/host.png" id="5_0jiue"]
+[ext_resource type="Texture2D" uid="uid://d3uotb33cl631" path="res://sprites/ui/buttons/host.png" id="5_0jiue"]
 [ext_resource type="Texture2D" uid="uid://76mmdqp6sowc" path="res://backgrounds/indiana/1_ground.png" id="5_dxc4l"]
-[ext_resource type="Texture2D" uid="uid://dudaamhm4kpna" path="res://sprites/ui/join.png" id="6_gs3d1"]
+[ext_resource type="Texture2D" uid="uid://dudaamhm4kpna" path="res://sprites/ui/buttons/join.png" id="6_gs3d1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0yna"]
 size = Vector2(3908, 153)

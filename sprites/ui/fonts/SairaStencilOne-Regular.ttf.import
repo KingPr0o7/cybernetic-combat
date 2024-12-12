@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dbcl6yjtva084"
-path="res://.godot/imported/SairaStencilOne-Regular.ttf-521bbdb7eee2668169a273447bdcdbd9.fontdata"
+path="res://.godot/imported/SairaStencilOne-Regular.ttf-458b878ea503ee58fd33485420fdda19.fontdata"
 
 [deps]
 
-source_file="res://sprites/ui/SairaStencilOne-Regular.ttf"
-dest_files=["res://.godot/imported/SairaStencilOne-Regular.ttf-521bbdb7eee2668169a273447bdcdbd9.fontdata"]
+source_file="res://sprites/ui/fonts/SairaStencilOne-Regular.ttf"
+dest_files=["res://.godot/imported/SairaStencilOne-Regular.ttf-458b878ea503ee58fd33485420fdda19.fontdata"]
 
 [params]
 

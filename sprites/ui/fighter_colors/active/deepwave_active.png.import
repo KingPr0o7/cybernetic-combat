@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drxw77vspey3e"
-path="res://.godot/imported/settings.png-3131683cdfdd5ab995976e483fd5ad8b.ctex"
+uid="uid://vw7bxk5gql8q"
+path="res://.godot/imported/deepwave_active.png-84d2164e411d3f69171b47c60573714f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/settings.png"
-dest_files=["res://.godot/imported/settings.png-3131683cdfdd5ab995976e483fd5ad8b.ctex"]
+source_file="res://sprites/ui/fighter_colors/active/deepwave_active.png"
+dest_files=["res://.godot/imported/deepwave_active.png-84d2164e411d3f69171b47c60573714f.ctex"]
 
 [params]
 

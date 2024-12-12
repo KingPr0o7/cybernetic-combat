@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bj6ifq6mos0b4"
-path="res://.godot/imported/cursor_font.ttf-7ffaa03a3297b3df3e959f461f4da941.fontdata"
+path="res://.godot/imported/cursor_font.ttf-8e1e6f75da3143d7b9a3aeb626e560d3.fontdata"
 
 [deps]
 
-source_file="res://sprites/ui/cursor_font.ttf"
-dest_files=["res://.godot/imported/cursor_font.ttf-7ffaa03a3297b3df3e959f461f4da941.fontdata"]
+source_file="res://sprites/ui/fonts/cursor_font.ttf"
+dest_files=["res://.godot/imported/cursor_font.ttf-8e1e6f75da3143d7b9a3aeb626e560d3.fontdata"]
 
 [params]
 

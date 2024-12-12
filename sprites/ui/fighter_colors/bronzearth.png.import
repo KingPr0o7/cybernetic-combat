@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3uotb33cl631"
-path="res://.godot/imported/host.png-909092eebe69291f75f27d25b074b670.ctex"
+uid="uid://bah6tgrxa1hva"
+path="res://.godot/imported/bronzearth.png-1a7c33f49c763d4f96f3f3754c966375.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/host.png"
-dest_files=["res://.godot/imported/host.png-909092eebe69291f75f27d25b074b670.ctex"]
+source_file="res://sprites/ui/fighter_colors/bronzearth.png"
+dest_files=["res://.godot/imported/bronzearth.png-1a7c33f49c763d4f96f3f3754c966375.ctex"]
 
 [params]
 

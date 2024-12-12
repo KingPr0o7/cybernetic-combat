@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://cpnorajeqtk13"]
 
 [ext_resource type="Script" path="res://scenes/scripts/hud.gd" id="1_nf6ga"]
-[ext_resource type="Texture2D" uid="uid://blxo2msm8yr16" path="res://sprites/ui/status_bar.png" id="2_le822"]
+[ext_resource type="Texture2D" uid="uid://blxo2msm8yr16" path="res://sprites/ui/hud/status_bar.png" id="2_le822"]
 [ext_resource type="PackedScene" uid="uid://baqkcg5s0h127" path="res://scenes/dummy.tscn" id="3_oevu7"]
 [ext_resource type="Texture2D" uid="uid://xwj0ds58j24j" path="res://sprites/ui/player_progress_bar/player_progress.png" id="4_tyl8i"]
 [ext_resource type="Texture2D" uid="uid://chh30qt6tngg7" path="res://sprites/ui/enemy_progress_bar/enemy_progress.png" id="5_yfkiq"]
-[ext_resource type="FontFile" uid="uid://dbcl6yjtva084" path="res://sprites/ui/SairaStencilOne-Regular.ttf" id="8_bp27s"]
+[ext_resource type="FontFile" uid="uid://dbcl6yjtva084" path="res://sprites/ui/fonts/SairaStencilOne-Regular.ttf" id="8_bp27s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccaxk"]
 corner_radius_top_left = 40

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dudaamhm4kpna"
-path="res://.godot/imported/join.png-e9aa58ea7fdaec2db7728bf9fb3ca567.ctex"
+uid="uid://b7nrxmxi1m3my"
+path="res://.godot/imported/graphite.png-a868cef4c347ec2d632ebf36f17ba16b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/join.png"
-dest_files=["res://.godot/imported/join.png-e9aa58ea7fdaec2db7728bf9fb3ca567.ctex"]
+source_file="res://sprites/ui/fighter_colors/graphite.png"
+dest_files=["res://.godot/imported/graphite.png-a868cef4c347ec2d632ebf36f17ba16b.ctex"]
 
 [params]
 

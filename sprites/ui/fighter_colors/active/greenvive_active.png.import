@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6qqtifm0he6f"
-path="res://.godot/imported/networking.png-47668e4aa328461eb7a2512a92bdafb6.ctex"
+uid="uid://d2nl10cus0hm6"
+path="res://.godot/imported/greenvive_active.png-a87c5089499d8523fae6efaa53783863.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/networking.png"
-dest_files=["res://.godot/imported/networking.png-47668e4aa328461eb7a2512a92bdafb6.ctex"]
+source_file="res://sprites/ui/fighter_colors/active/greenvive_active.png"
+dest_files=["res://.godot/imported/greenvive_active.png-a87c5089499d8523fae6efaa53783863.ctex"]
 
 [params]
 

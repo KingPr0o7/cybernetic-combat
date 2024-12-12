@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/scripts/cursor.gd" id="1_0543l"]
 [ext_resource type="Texture2D" uid="uid://dqu5sgo8a7wo3" path="res://sprites/ui/cursor.png" id="1_kp36e"]
-[ext_resource type="FontFile" uid="uid://bj6ifq6mos0b4" path="res://sprites/ui/cursor_font.ttf" id="3_l6jug"]
+[ext_resource type="FontFile" uid="uid://bj6ifq6mos0b4" path="res://sprites/ui/fonts/cursor_font.ttf" id="3_l6jug"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_guffa"]
 font = ExtResource("3_l6jug")
@@ -28,7 +28,6 @@ properties/3/replication_mode = 1
 [node name="cursor" type="Node2D"]
 position = Vector2(763, 446)
 script = ExtResource("1_0543l")
-cursor_index = null
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_kp36e")

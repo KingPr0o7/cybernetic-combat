@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://y022oko5ohew"]
+[gd_scene load_steps=40 format=3 uid="uid://y022oko5ohew"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_447ie"]
 [ext_resource type="Texture2D" uid="uid://cc1h3j8fhb11p" path="res://backgrounds/alaska/3_sky.png" id="1_v6bym"]
@@ -6,15 +6,42 @@
 [ext_resource type="PackedScene" uid="uid://bjyqxgt751a7p" path="res://scenes/stickman.tscn" id="2_vla03"]
 [ext_resource type="Texture2D" uid="uid://mppgcojafiws" path="res://backgrounds/alaska/1_mountains.png" id="3_3tjkg"]
 [ext_resource type="Texture2D" uid="uid://cav6ullj3tj15" path="res://sprites/ui/logo.png" id="4_1ll2i"]
-[ext_resource type="Texture2D" uid="uid://cyqrkkf33l07e" path="res://sprites/ui/start.png" id="5_wjjdq"]
-[ext_resource type="Texture2D" uid="uid://drxw77vspey3e" path="res://sprites/ui/settings.png" id="6_mwj2a"]
-[ext_resource type="Texture2D" uid="uid://ix26j50q2tn8" path="res://sprites/ui/credits.png" id="7_2w0yx"]
+[ext_resource type="Texture2D" uid="uid://cyqrkkf33l07e" path="res://sprites/ui/buttons/start.png" id="5_wjjdq"]
+[ext_resource type="Texture2D" uid="uid://drxw77vspey3e" path="res://sprites/ui/buttons/settings.png" id="6_mwj2a"]
+[ext_resource type="Texture2D" uid="uid://ix26j50q2tn8" path="res://sprites/ui/buttons/credits.png" id="7_2w0yx"]
 [ext_resource type="Script" path="res://scenes/scripts/networking.gd" id="10_5tece"]
-[ext_resource type="Texture2D" uid="uid://c6qqtifm0he6f" path="res://sprites/ui/networking.png" id="10_b38m4"]
-[ext_resource type="FontFile" uid="uid://dbcl6yjtva084" path="res://sprites/ui/SairaStencilOne-Regular.ttf" id="10_jop15"]
+[ext_resource type="Texture2D" uid="uid://c6qqtifm0he6f" path="res://sprites/ui/menu_titles/networking.png" id="10_b38m4"]
+[ext_resource type="FontFile" uid="uid://dbcl6yjtva084" path="res://sprites/ui/fonts/SairaStencilOne-Regular.ttf" id="10_jop15"]
 [ext_resource type="PackedScene" uid="uid://b466cv8bs2t4n" path="res://scenes/cursor.tscn" id="11_wos8b"]
+[ext_resource type="Texture2D" uid="uid://toufgcd0prhw" path="res://sprites/ui/fighter_colors/amethystine.png" id="14_vmp05"]
+[ext_resource type="Texture2D" uid="uid://cnmyrohh84c10" path="res://sprites/ui/menu_titles/fighter_color.png" id="15_o3uwy"]
+[ext_resource type="Texture2D" uid="uid://kw0315xfq3d1" path="res://sprites/ui/fighter_colors/active/amethystine.png" id="16_0j6x3"]
+[ext_resource type="Texture2D" uid="uid://dwqixqh31ecy4" path="res://sprites/ui/fighter_colors/plumshade.png" id="16_ya3jj"]
+[ext_resource type="Texture2D" uid="uid://dxrwkxjngshvh" path="res://sprites/ui/fighter_colors/active/plumshade_active.png" id="18_0ts6f"]
+[ext_resource type="Texture2D" uid="uid://bkwdrhxfy3l0e" path="res://sprites/ui/fighter_colors/cerulia.png" id="19_qhypt"]
+[ext_resource type="Texture2D" uid="uid://dqarxpkvk00o5" path="res://sprites/ui/fighter_colors/active/cerulia_active.png" id="20_ea7jt"]
+[ext_resource type="Texture2D" uid="uid://dlnwvxt48sfbo" path="res://sprites/ui/fighter_colors/deepwave.png" id="21_w2j3j"]
+[ext_resource type="Texture2D" uid="uid://vw7bxk5gql8q" path="res://sprites/ui/fighter_colors/active/deepwave_active.png" id="22_ds6de"]
+[ext_resource type="Texture2D" uid="uid://d10850cpd2i08" path="res://sprites/ui/fighter_colors/scarflare.png" id="23_syh8h"]
+[ext_resource type="Texture2D" uid="uid://hgpx7qcaqkco" path="res://sprites/ui/fighter_colors/active/scarflare_active.png" id="24_p3uv4"]
+[ext_resource type="Texture2D" uid="uid://5jpr4sw00kym" path="res://sprites/ui/fighter_colors/crimsonite.png" id="25_watxd"]
+[ext_resource type="Texture2D" uid="uid://cj645qnahwim1" path="res://sprites/ui/fighter_colors/active/crimsonite_active.png" id="26_r151o"]
+[ext_resource type="Texture2D" uid="uid://dbcfubpxjncxo" path="res://sprites/ui/fighter_colors/greenvive.png" id="27_w0gkv"]
+[ext_resource type="Texture2D" uid="uid://d2nl10cus0hm6" path="res://sprites/ui/fighter_colors/active/greenvive_active.png" id="28_u0qvn"]
+[ext_resource type="Texture2D" uid="uid://depxgjwj7lqb5" path="res://sprites/ui/fighter_colors/terrain.png" id="29_7lfcd"]
+[ext_resource type="Texture2D" uid="uid://m7g1pfiwn4jr" path="res://sprites/ui/fighter_colors/active/terrain_active.png" id="30_4ivlw"]
+[ext_resource type="Texture2D" uid="uid://cae0sbqiebcki" path="res://sprites/ui/fighter_colors/sienna.png" id="31_m7m2e"]
+[ext_resource type="Texture2D" uid="uid://dyd32eim8js6g" path="res://sprites/ui/fighter_colors/active/sienna_active.png" id="32_tpe26"]
+[ext_resource type="Texture2D" uid="uid://bah6tgrxa1hva" path="res://sprites/ui/fighter_colors/bronzearth.png" id="33_4lsx4"]
+[ext_resource type="Texture2D" uid="uid://blmnf8hdxtok4" path="res://sprites/ui/fighter_colors/active/bronzearth_active.png" id="34_gkrbt"]
+[ext_resource type="Texture2D" uid="uid://b7nrxmxi1m3my" path="res://sprites/ui/fighter_colors/graphite.png" id="35_lwuny"]
+[ext_resource type="Texture2D" uid="uid://by6xwogshtvev" path="res://sprites/ui/fighter_colors/active/graphite_active.png" id="36_2jh71"]
+[ext_resource type="Texture2D" uid="uid://dll4gyu86fv8i" path="res://sprites/ui/fighter_colors/midnight.png" id="37_0woys"]
+[ext_resource type="Texture2D" uid="uid://cug4dx7yay57k" path="res://sprites/ui/fighter_colors/active/midnight_active.png" id="38_p8sbf"]
 
-[node name="Main Menu" type="Control"]
+[sub_resource type="BitMap" id="BitMap_f8h85"]
+
+[node name="main_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,9 +80,14 @@ motion_mirroring = Vector2(1920, 0)
 texture = ExtResource("3_3tjkg")
 centered = false
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/cursor.tscn")
+spawn_path = NodePath("..")
+
 [node name="all_menus" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 7680.0
+offset_left = -16.125
+offset_right = 7663.88
 offset_bottom = 1080.0
 
 [node name="main_menu" type="Control" parent="all_menus"]
@@ -143,16 +175,158 @@ offset_bottom = 465.0
 grow_horizontal = 2
 texture = ExtResource("10_b38m4")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="all_menus/networking"]
-_spawnable_scenes = PackedStringArray("res://scenes/cursor.tscn")
-spawn_path = NodePath("..")
+[node name="Button2" type="Button" parent="all_menus/networking"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -259.0
+offset_right = 56.0
+offset_bottom = -188.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Move to Colors"
 
 [node name="character_selector" type="Control" parent="all_menus"]
 anchors_preset = 0
-offset_left = 3864.0
-offset_top = -27.0
-offset_right = 5784.0
-offset_bottom = 1053.0
+offset_left = 3840.0
+offset_right = 5760.0
+offset_bottom = 1080.0
+
+[node name="TextureRect" type="TextureRect" parent="all_menus/character_selector"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -709.5
+offset_right = 709.5
+offset_bottom = 464.0
+grow_horizontal = 2
+texture = ExtResource("15_o3uwy")
+
+[node name="center_container" type="HBoxContainer" parent="all_menus/character_selector"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -287.5
+offset_right = 360.0
+offset_bottom = 287.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="first_color_set" type="VBoxContainer" parent="all_menus/character_selector/center_container"]
+layout_mode = 2
+alignment = 1
+
+[node name="first_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/first_color_set"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="amethystine" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/first_color_pair"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("14_vmp05")
+texture_pressed = ExtResource("16_0j6x3")
+texture_hover = ExtResource("16_0j6x3")
+texture_click_mask = SubResource("BitMap_f8h85")
+
+[node name="plumshade" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/first_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("16_ya3jj")
+texture_pressed = ExtResource("18_0ts6f")
+texture_hover = ExtResource("18_0ts6f")
+
+[node name="second_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/first_color_set"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="cerulia" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/second_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("19_qhypt")
+texture_pressed = ExtResource("20_ea7jt")
+texture_hover = ExtResource("20_ea7jt")
+
+[node name="deepwave" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/second_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("21_w2j3j")
+texture_pressed = ExtResource("22_ds6de")
+texture_hover = ExtResource("22_ds6de")
+
+[node name="third_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/first_color_set"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="scarflare" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/third_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("23_syh8h")
+texture_pressed = ExtResource("24_p3uv4")
+texture_hover = ExtResource("24_p3uv4")
+
+[node name="crimsonite" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/third_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("25_watxd")
+texture_pressed = ExtResource("26_r151o")
+texture_hover = ExtResource("26_r151o")
+
+[node name="second_color_set" type="VBoxContainer" parent="all_menus/character_selector/center_container"]
+layout_mode = 2
+alignment = 1
+
+[node name="first_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/second_color_set"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="greenvive" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/first_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("27_w0gkv")
+texture_pressed = ExtResource("28_u0qvn")
+texture_hover = ExtResource("28_u0qvn")
+
+[node name="terrain" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/first_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("29_7lfcd")
+texture_pressed = ExtResource("30_4ivlw")
+texture_hover = ExtResource("30_4ivlw")
+
+[node name="second_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/second_color_set"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="sienna" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/second_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("31_m7m2e")
+texture_pressed = ExtResource("32_tpe26")
+texture_hover = ExtResource("32_tpe26")
+
+[node name="bronzearth" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/second_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("33_4lsx4")
+texture_pressed = ExtResource("34_gkrbt")
+texture_hover = ExtResource("34_gkrbt")
+
+[node name="third_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/second_color_set"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="graphite" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/third_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("35_lwuny")
+texture_pressed = ExtResource("36_2jh71")
+texture_hover = ExtResource("36_2jh71")
+
+[node name="midnight" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/third_color_pair"]
+layout_mode = 2
+texture_normal = ExtResource("37_0woys")
+texture_pressed = ExtResource("38_p8sbf")
+texture_hover = ExtResource("38_p8sbf")
 
 [node name="map_selector" type="Control" parent="all_menus"]
 anchors_preset = 0
@@ -163,3 +337,4 @@ offset_bottom = 1080.0
 [connection signal="pressed" from="all_menus/main_menu/Buttons/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="all_menus/main_menu/Buttons/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="all_menus/networking/Button" to="all_menus/networking" method="_on_button_pressed"]
+[connection signal="pressed" from="all_menus/networking/Button2" to="." method="_on_button_2_pressed"]

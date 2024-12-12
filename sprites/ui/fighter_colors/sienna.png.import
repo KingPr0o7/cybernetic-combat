@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c250lscmtnrbn"
-path="res://.godot/imported/stickman fighter-blue-1_-idle_00.png-b84ad74e0170ff947853f32aa847d550.ctex"
+uid="uid://cae0sbqiebcki"
+path="res://.godot/imported/sienna.png-23d5faf7ea33f1ed06f528ccfbf6aee9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/stickman fighter-blue-1_-idle_00.png"
-dest_files=["res://.godot/imported/stickman fighter-blue-1_-idle_00.png-b84ad74e0170ff947853f32aa847d550.ctex"]
+source_file="res://sprites/ui/fighter_colors/sienna.png"
+dest_files=["res://.godot/imported/sienna.png-23d5faf7ea33f1ed06f528ccfbf6aee9.ctex"]
 
 [params]
 

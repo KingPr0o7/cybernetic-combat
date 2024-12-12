@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyqrkkf33l07e"
-path="res://.godot/imported/start.png-6fd126ae1a4484fac9f79eb08fc0ad57.ctex"
+uid="uid://dll4gyu86fv8i"
+path="res://.godot/imported/midnight.png-7a50e0dbc966be52774eb99c1de38603.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/start.png"
-dest_files=["res://.godot/imported/start.png-6fd126ae1a4484fac9f79eb08fc0ad57.ctex"]
+source_file="res://sprites/ui/fighter_colors/midnight.png"
+dest_files=["res://.godot/imported/midnight.png-7a50e0dbc966be52774eb99c1de38603.ctex"]
 
 [params]
 

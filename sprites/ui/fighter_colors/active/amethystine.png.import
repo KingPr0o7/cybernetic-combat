@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ix26j50q2tn8"
-path="res://.godot/imported/credits.png-9333d0897f58cc3457b06811373ceb6e.ctex"
+uid="uid://kw0315xfq3d1"
+path="res://.godot/imported/amethystine.png-5f50332068bb79eacd577119f9f7ad5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/credits.png"
-dest_files=["res://.godot/imported/credits.png-9333d0897f58cc3457b06811373ceb6e.ctex"]
+source_file="res://sprites/ui/fighter_colors/active/amethystine.png"
+dest_files=["res://.godot/imported/amethystine.png-5f50332068bb79eacd577119f9f7ad5b.ctex"]
 
 [params]
 
