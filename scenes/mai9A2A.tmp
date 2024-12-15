@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://y022oko5ohew"]
+[gd_scene load_steps=45 format=3 uid="uid://y022oko5ohew"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_447ie"]
 [ext_resource type="Texture2D" uid="uid://cc1h3j8fhb11p" path="res://backgrounds/alaska/3_sky.png" id="1_v6bym"]
@@ -48,6 +48,20 @@ size = Vector2(438.502, 66)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grio1"]
 size = Vector2(438, 64)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c6u0d"]
+properties/0/path = NodePath("host_username_area/host_username:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("enemy_username_area/enemy_username:text")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("host_username_area/host_username:editable")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("enemy_username_area/enemy_username:editable")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -204,7 +218,6 @@ anchors_preset = 0
 offset_left = 3856.15
 offset_right = 5776.15
 offset_bottom = 1080.0
-scale = Vector2(0.98635, 0.862397)
 script = ExtResource("14_6pyb8")
 
 [node name="fighter_color_title" type="TextureRect" parent="all_menus/character_selector"]
@@ -370,7 +383,6 @@ middle_mouse_paste_enabled = false
 selecting_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
-select_all_on_focus = true
 
 [node name="host_coll" type="CollisionShape2D" parent="all_menus/character_selector/host_username_area"]
 position = Vector2(218.754, 32)
@@ -378,7 +390,6 @@ shape = SubResource("RectangleShape2D_5vo4a")
 
 [node name="enemy_username_area" type="Area2D" parent="all_menus/character_selector"]
 position = Vector2(1411.98, 258)
-scale = Vector2(0.993035, 1.00016)
 
 [node name="enemy_username" type="LineEdit" parent="all_menus/character_selector/enemy_username_area"]
 z_as_relative = false
@@ -399,11 +410,13 @@ middle_mouse_paste_enabled = false
 selecting_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
-select_all_on_focus = true
 
 [node name="enemy_coll" type="CollisionShape2D" parent="all_menus/character_selector/enemy_username_area"]
 position = Vector2(219, 32)
 shape = SubResource("RectangleShape2D_grio1")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="all_menus/character_selector"]
+replication_config = SubResource("SceneReplicationConfig_c6u0d")
 
 [node name="map_selector" type="Control" parent="all_menus"]
 anchors_preset = 0

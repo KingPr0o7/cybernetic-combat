@@ -87,6 +87,7 @@ shape = SubResource("RectangleShape2D_48o4g")
 show_behind_parent = true
 position = Vector2(406.457, -775.215)
 rotation = -0.0699567
+scale = Vector2(1, 1)
 bone_name = "left_fist"
 
 [node name="left_fist_area" type="Area2D" parent="Sprite/left_fist" groups=["hitbox"]]
@@ -117,6 +118,7 @@ debug_color = Color(0.849967, 0.342046, 0.399602, 0.42)
 show_behind_parent = true
 position = Vector2(64.3257, -221.88)
 rotation = 1.46138
+scale = Vector2(1, 1)
 bone_name = "left_tibia"
 
 [node name="left_tibia_area" type="Area2D" parent="Sprite/left_tibia" groups=["hitbox"]]

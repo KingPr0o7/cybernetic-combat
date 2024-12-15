@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var USERNAME = $username
+@onready var USERNAME = $cursor_area/username
 @export var cursor_index = 0
 
 var background_speed: float = 0

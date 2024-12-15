@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b466cv8bs2t4n"]
+[gd_scene load_steps=7 format=3 uid="uid://b466cv8bs2t4n"]
 
 [ext_resource type="Script" path="res://scenes/scripts/cursor.gd" id="1_0543l"]
 [ext_resource type="Texture2D" uid="uid://dqu5sgo8a7wo3" path="res://sprites/ui/cursor.png" id="1_kp36e"]
 [ext_resource type="FontFile" uid="uid://bj6ifq6mos0b4" path="res://sprites/ui/fonts/cursor_font.ttf" id="3_l6jug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8uul4"]
+radius = 19.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_guffa"]
 font = ExtResource("3_l6jug")
@@ -12,27 +15,29 @@ outline_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(1.05, 3.64)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4k7bv"]
-properties/0/path = NodePath("username:text")
+properties/0/path = NodePath(".:cursor_index")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("username:position")
+properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("sprite:position")
+properties/2/path = NodePath("cursor_area/username:text")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath(".:position")
-properties/3/spawn = true
-properties/3/replication_mode = 1
 
 [node name="cursor" type="Node2D"]
 position = Vector2(763, 446)
 script = ExtResource("1_0543l")
 
-[node name="sprite" type="Sprite2D" parent="."]
+[node name="cursor_area" type="Area2D" parent="."]
+
+[node name="cursor_coll" type="CollisionShape2D" parent="cursor_area"]
+shape = SubResource("CircleShape2D_8uul4")
+
+[node name="sprite" type="Sprite2D" parent="cursor_area"]
 texture = ExtResource("1_kp36e")
 
-[node name="username" type="Label" parent="."]
+[node name="username" type="Label" parent="cursor_area"]
 offset_left = 12.0
 offset_top = -35.0
 offset_right = 138.0
