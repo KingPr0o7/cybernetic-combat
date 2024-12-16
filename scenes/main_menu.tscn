@@ -41,7 +41,8 @@
 [ext_resource type="Texture2D" uid="uid://cug4dx7yay57k" path="res://sprites/ui/fighter_colors/active/midnight_active.png" id="38_p8sbf"]
 [ext_resource type="PackedScene" uid="uid://baqkcg5s0h127" path="res://scenes/dummy.tscn" id="39_03onr"]
 
-[sub_resource type="BitMap" id="BitMap_f8h85"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umo1y"]
+size = Vector2(176.904, 184.409)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vo4a"]
 size = Vector2(438.502, 66)
@@ -247,13 +248,26 @@ toggle_mode = true
 texture_normal = ExtResource("14_vmp05")
 texture_pressed = ExtResource("16_0j6x3")
 texture_hover = ExtResource("16_0j6x3")
-texture_click_mask = SubResource("BitMap_f8h85")
+
+[node name="amethystine_area" type="Area2D" parent="all_menus/character_selector/center_container/first_color_set/first_color_pair/amethystine"]
+
+[node name="amethystine_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/first_color_set/first_color_pair/amethystine/amethystine_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
 
 [node name="plumshade" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/first_color_pair"]
 layout_mode = 2
 texture_normal = ExtResource("16_ya3jj")
 texture_pressed = ExtResource("18_0ts6f")
 texture_hover = ExtResource("18_0ts6f")
+
+[node name="plumshade_area" type="Area2D" parent="all_menus/character_selector/center_container/first_color_set/first_color_pair/plumshade"]
+
+[node name="plumshade_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/first_color_set/first_color_pair/plumshade/plumshade_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
 
 [node name="second_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/first_color_set"]
 layout_mode = 2
@@ -265,11 +279,25 @@ texture_normal = ExtResource("19_qhypt")
 texture_pressed = ExtResource("20_ea7jt")
 texture_hover = ExtResource("20_ea7jt")
 
+[node name="cerulia_area" type="Area2D" parent="all_menus/character_selector/center_container/first_color_set/second_color_pair/cerulia"]
+
+[node name="cerulia_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/first_color_set/second_color_pair/cerulia/cerulia_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
+
 [node name="deepwave" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/second_color_pair"]
 layout_mode = 2
 texture_normal = ExtResource("21_w2j3j")
 texture_pressed = ExtResource("22_ds6de")
 texture_hover = ExtResource("22_ds6de")
+
+[node name="deepwave_area" type="Area2D" parent="all_menus/character_selector/center_container/first_color_set/second_color_pair/deepwave"]
+
+[node name="deepwave_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/first_color_set/second_color_pair/deepwave/deepwave_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
 
 [node name="third_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/first_color_set"]
 layout_mode = 2
@@ -281,11 +309,25 @@ texture_normal = ExtResource("23_syh8h")
 texture_pressed = ExtResource("24_p3uv4")
 texture_hover = ExtResource("24_p3uv4")
 
+[node name="scarflare_area" type="Area2D" parent="all_menus/character_selector/center_container/first_color_set/third_color_pair/scarflare"]
+
+[node name="scareflare_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/first_color_set/third_color_pair/scarflare/scarflare_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
+
 [node name="crimsonite" type="TextureButton" parent="all_menus/character_selector/center_container/first_color_set/third_color_pair"]
 layout_mode = 2
 texture_normal = ExtResource("25_watxd")
 texture_pressed = ExtResource("26_r151o")
 texture_hover = ExtResource("26_r151o")
+
+[node name="crimsonite_area" type="Area2D" parent="all_menus/character_selector/center_container/first_color_set/third_color_pair/crimsonite"]
+
+[node name="crimsonite_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/first_color_set/third_color_pair/crimsonite/crimsonite_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
 
 [node name="second_color_set" type="VBoxContainer" parent="all_menus/character_selector/center_container"]
 layout_mode = 2
@@ -301,11 +343,25 @@ texture_normal = ExtResource("27_w0gkv")
 texture_pressed = ExtResource("28_u0qvn")
 texture_hover = ExtResource("28_u0qvn")
 
+[node name="greenvive_area" type="Area2D" parent="all_menus/character_selector/center_container/second_color_set/first_color_pair/greenvive"]
+
+[node name="greenvive_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/second_color_set/first_color_pair/greenvive/greenvive_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
+
 [node name="terrain" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/first_color_pair"]
 layout_mode = 2
 texture_normal = ExtResource("29_7lfcd")
 texture_pressed = ExtResource("30_4ivlw")
 texture_hover = ExtResource("30_4ivlw")
+
+[node name="terrain_area" type="Area2D" parent="all_menus/character_selector/center_container/second_color_set/first_color_pair/terrain"]
+
+[node name="terrain_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/second_color_set/first_color_pair/terrain/terrain_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
 
 [node name="second_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/second_color_set"]
 layout_mode = 2
@@ -317,11 +373,25 @@ texture_normal = ExtResource("31_m7m2e")
 texture_pressed = ExtResource("32_tpe26")
 texture_hover = ExtResource("32_tpe26")
 
+[node name="sienna_area" type="Area2D" parent="all_menus/character_selector/center_container/second_color_set/second_color_pair/sienna"]
+
+[node name="sienna_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/second_color_set/second_color_pair/sienna/sienna_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
+
 [node name="bronzearth" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/second_color_pair"]
 layout_mode = 2
 texture_normal = ExtResource("33_4lsx4")
 texture_pressed = ExtResource("34_gkrbt")
 texture_hover = ExtResource("34_gkrbt")
+
+[node name="bronzearth_area" type="Area2D" parent="all_menus/character_selector/center_container/second_color_set/second_color_pair/bronzearth"]
+
+[node name="bronzearth_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/second_color_set/second_color_pair/bronzearth/bronzearth_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
 
 [node name="third_color_pair" type="HBoxContainer" parent="all_menus/character_selector/center_container/second_color_set"]
 layout_mode = 2
@@ -333,20 +403,42 @@ texture_normal = ExtResource("35_lwuny")
 texture_pressed = ExtResource("36_2jh71")
 texture_hover = ExtResource("36_2jh71")
 
+[node name="graphite_area" type="Area2D" parent="all_menus/character_selector/center_container/second_color_set/third_color_pair/graphite"]
+
+[node name="graphite_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/second_color_set/third_color_pair/graphite/graphite_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
+
 [node name="midnight" type="TextureButton" parent="all_menus/character_selector/center_container/second_color_set/third_color_pair"]
 layout_mode = 2
 texture_normal = ExtResource("37_0woys")
 texture_pressed = ExtResource("38_p8sbf")
 texture_hover = ExtResource("38_p8sbf")
 
-[node name="host" parent="all_menus/character_selector" instance=ExtResource("39_03onr")]
+[node name="midnight_area" type="Area2D" parent="all_menus/character_selector/center_container/second_color_set/third_color_pair/midnight"]
+
+[node name="midnight_coll" type="CollisionShape2D" parent="all_menus/character_selector/center_container/second_color_set/third_color_pair/midnight/midnight_area"]
+position = Vector2(88.539, 92.13)
+scale = Vector2(1.001, 1)
+shape = SubResource("RectangleShape2D_umo1y")
+
+[node name="host_dummy" parent="all_menus/character_selector" instance=ExtResource("39_03onr")]
 position = Vector2(267.125, 1094)
 scale = Vector2(0.7, 0.728)
+preview_skin = "amethystine"
+current_animation = "fight_stance"
+load_animation = 5
+color = 7
 
-[node name="enemy" parent="all_menus/character_selector" instance=ExtResource("39_03onr")]
+[node name="enemy_dummy" parent="all_menus/character_selector" instance=ExtResource("39_03onr")]
 position = Vector2(1637.98, 1094)
 scale = Vector2(0.7, 0.728)
+preview_skin = "amethystine"
+current_animation = "fight_stance"
+load_animation = 5
 direction = -1
+color = 4
 
 [node name="host_username_area" type="Area2D" parent="all_menus/character_selector"]
 position = Vector2(64, 258)

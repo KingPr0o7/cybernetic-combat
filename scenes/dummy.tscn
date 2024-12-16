@@ -7,8 +7,11 @@
 position = Vector2(933, 770)
 scale = Vector2(0.4, 0.416)
 skeleton_data_res = ExtResource("1_s1jqn")
-preview_skin = "graphite"
-preview_animation = "idle"
+preview_skin = "midnight"
+preview_animation = "-- Empty --"
 preview_frame = false
 preview_time = 0.0
 script = ExtResource("2_1kqdu")
+current_animation = "idle"
+load_animation = 7
+color = 11
