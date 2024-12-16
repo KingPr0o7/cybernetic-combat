@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://y022oko5ohew"]
+[gd_scene load_steps=48 format=3 uid="uid://y022oko5ohew"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_447ie"]
 [ext_resource type="Texture2D" uid="uid://cc1h3j8fhb11p" path="res://backgrounds/alaska/3_sky.png" id="1_v6bym"]
@@ -40,6 +40,8 @@
 [ext_resource type="Texture2D" uid="uid://dll4gyu86fv8i" path="res://sprites/ui/fighter_colors/midnight.png" id="37_0woys"]
 [ext_resource type="Texture2D" uid="uid://cug4dx7yay57k" path="res://sprites/ui/fighter_colors/active/midnight_active.png" id="38_p8sbf"]
 [ext_resource type="PackedScene" uid="uid://baqkcg5s0h127" path="res://scenes/dummy.tscn" id="39_03onr"]
+[ext_resource type="Texture2D" uid="uid://divu0wc8yaoxs" path="res://sprites/ui/buttons/ready.png" id="41_og2xq"]
+[ext_resource type="Texture2D" uid="uid://cf1nxb034tdrv" path="res://sprites/ui/buttons/readyed.png" id="42_3s056"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umo1y"]
 size = Vector2(176.904, 184.409)
@@ -47,8 +49,15 @@ size = Vector2(176.904, 184.409)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vo4a"]
 size = Vector2(438.502, 66)
 
+[sub_resource type="LabelSettings" id="LabelSettings_36bhq"]
+font = ExtResource("10_jop15")
+font_size = 36
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grio1"]
 size = Vector2(438, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apcna"]
+size = Vector2(478.625, 160)
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -99,12 +108,12 @@ offset_left = -16.125
 offset_right = 7663.88
 offset_bottom = 1080.0
 
-[node name="main_menu" type="Control" parent="all_menus"]
+[node name="start_menu" type="Control" parent="all_menus"]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Logo" type="TextureRect" parent="all_menus/main_menu"]
+[node name="Logo" type="TextureRect" parent="all_menus/start_menu"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -116,7 +125,7 @@ offset_bottom = 874.0
 grow_horizontal = 2
 texture = ExtResource("4_1ll2i")
 
-[node name="Buttons" type="MarginContainer" parent="all_menus/main_menu"]
+[node name="Buttons" type="MarginContainer" parent="all_menus/start_menu"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -129,20 +138,20 @@ offset_right = 234.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="all_menus/main_menu/Buttons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="all_menus/start_menu/Buttons"]
 layout_mode = 2
 
-[node name="Start" type="Button" parent="all_menus/main_menu/Buttons/VBoxContainer"]
+[node name="Start" type="Button" parent="all_menus/start_menu/Buttons/VBoxContainer"]
 layout_mode = 2
 icon = ExtResource("5_wjjdq")
 flat = true
 
-[node name="Settings" type="Button" parent="all_menus/main_menu/Buttons/VBoxContainer"]
+[node name="Settings" type="Button" parent="all_menus/start_menu/Buttons/VBoxContainer"]
 layout_mode = 2
 icon = ExtResource("6_mwj2a")
 flat = true
 
-[node name="Credits" type="Button" parent="all_menus/main_menu/Buttons/VBoxContainer"]
+[node name="Credits" type="Button" parent="all_menus/start_menu/Buttons/VBoxContainer"]
 layout_mode = 2
 icon = ExtResource("7_2w0yx")
 flat = true
@@ -202,10 +211,9 @@ text = "Move to Colors"
 [node name="character_selector" type="Control" parent="all_menus"]
 clip_contents = true
 anchors_preset = 0
-offset_left = 3856.15
-offset_right = 5776.15
+offset_left = 3856.0
+offset_right = 5776.0
 offset_bottom = 1080.0
-scale = Vector2(0.98635, 0.862397)
 script = ExtResource("14_6pyb8")
 
 [node name="fighter_color_title" type="TextureRect" parent="all_menus/character_selector"]
@@ -423,27 +431,15 @@ position = Vector2(88.539, 92.13)
 scale = Vector2(1.001, 1)
 shape = SubResource("RectangleShape2D_umo1y")
 
-[node name="host_dummy" parent="all_menus/character_selector" instance=ExtResource("39_03onr")]
-position = Vector2(267.125, 1094)
-scale = Vector2(0.7, 0.728)
-preview_skin = "amethystine"
-current_animation = "fight_stance"
-load_animation = 5
-color = 7
+[node name="Host" type="Control" parent="all_menus/character_selector"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="enemy_dummy" parent="all_menus/character_selector" instance=ExtResource("39_03onr")]
-position = Vector2(1637.98, 1094)
-scale = Vector2(0.7, 0.728)
-preview_skin = "amethystine"
-current_animation = "fight_stance"
-load_animation = 5
-direction = -1
-color = 4
-
-[node name="host_username_area" type="Area2D" parent="all_menus/character_selector"]
+[node name="host_username_area" type="Area2D" parent="all_menus/character_selector/Host"]
 position = Vector2(64, 258)
 
-[node name="host_username" type="LineEdit" parent="all_menus/character_selector/host_username_area"]
+[node name="host_username" type="LineEdit" parent="all_menus/character_selector/Host/host_username_area"]
 z_as_relative = false
 offset_right = 438.0
 offset_bottom = 64.0
@@ -464,15 +460,38 @@ deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 select_all_on_focus = true
 
-[node name="host_coll" type="CollisionShape2D" parent="all_menus/character_selector/host_username_area"]
+[node name="host_coll" type="CollisionShape2D" parent="all_menus/character_selector/Host/host_username_area"]
 position = Vector2(218.754, 32)
 shape = SubResource("RectangleShape2D_5vo4a")
 
-[node name="enemy_username_area" type="Area2D" parent="all_menus/character_selector"]
+[node name="host_dummy" parent="all_menus/character_selector/Host" instance=ExtResource("39_03onr")]
+position = Vector2(267.125, 1094)
+scale = Vector2(0.7, 0.728)
+preview_skin = "amethystine"
+current_animation = "fight_stance"
+load_animation = 5
+color = 7
+
+[node name="host_ready_status" type="Label" parent="all_menus/character_selector/Host"]
+layout_mode = 0
+offset_left = 181.125
+offset_top = 328.0
+offset_right = 387.125
+offset_bottom = 385.0
+text = "Not Ready"
+label_settings = SubResource("LabelSettings_36bhq")
+uppercase = true
+
+[node name="Enemy" type="Control" parent="all_menus/character_selector"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="enemy_username_area" type="Area2D" parent="all_menus/character_selector/Enemy"]
 position = Vector2(1411.98, 258)
 scale = Vector2(0.993035, 1.00016)
 
-[node name="enemy_username" type="LineEdit" parent="all_menus/character_selector/enemy_username_area"]
+[node name="enemy_username" type="LineEdit" parent="all_menus/character_selector/Enemy/enemy_username_area"]
 z_as_relative = false
 offset_left = -0.0253906
 offset_right = 437.975
@@ -493,9 +512,49 @@ deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 select_all_on_focus = true
 
-[node name="enemy_coll" type="CollisionShape2D" parent="all_menus/character_selector/enemy_username_area"]
+[node name="enemy_coll" type="CollisionShape2D" parent="all_menus/character_selector/Enemy/enemy_username_area"]
 position = Vector2(219, 32)
 shape = SubResource("RectangleShape2D_grio1")
+
+[node name="enemy_ready_status" type="Label" parent="all_menus/character_selector/Enemy"]
+layout_mode = 0
+offset_left = 1526.89
+offset_top = 328.0
+offset_right = 1732.89
+offset_bottom = 385.0
+text = "Not Ready"
+label_settings = SubResource("LabelSettings_36bhq")
+uppercase = true
+
+[node name="enemy_dummy" parent="all_menus/character_selector/Enemy" instance=ExtResource("39_03onr")]
+position = Vector2(1637.98, 1094)
+scale = Vector2(0.7, 0.728)
+preview_skin = "amethystine"
+current_animation = "fight_stance"
+load_animation = 5
+direction = -1
+color = 4
+
+[node name="ready_up" type="TextureButton" parent="all_menus/character_selector"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -229.5
+offset_top = -143.0
+offset_right = 229.5
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("41_og2xq")
+texture_pressed = ExtResource("42_3s056")
+
+[node name="ready_area" type="Area2D" parent="all_menus/character_selector/ready_up"]
+
+[node name="ready_coll" type="CollisionShape2D" parent="all_menus/character_selector/ready_up/ready_area"]
+position = Vector2(229.312, 70)
+shape = SubResource("RectangleShape2D_apcna")
 
 [node name="map_selector" type="Control" parent="all_menus"]
 anchors_preset = 0
@@ -503,11 +562,11 @@ offset_left = 5760.0
 offset_right = 7680.0
 offset_bottom = 1080.0
 
-[connection signal="pressed" from="all_menus/main_menu/Buttons/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="all_menus/main_menu/Buttons/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="all_menus/start_menu/Buttons/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="all_menus/start_menu/Buttons/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="all_menus/networking/Button" to="all_menus/networking" method="_on_button_pressed"]
 [connection signal="pressed" from="all_menus/networking/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="area_entered" from="all_menus/character_selector/host_username_area" to="all_menus/character_selector" method="_on_host_username_area_area_entered"]
-[connection signal="area_exited" from="all_menus/character_selector/host_username_area" to="all_menus/character_selector" method="_on_host_username_area_area_exited"]
-[connection signal="area_entered" from="all_menus/character_selector/enemy_username_area" to="all_menus/character_selector" method="_on_enemy_username_area_area_entered"]
-[connection signal="area_exited" from="all_menus/character_selector/enemy_username_area" to="all_menus/character_selector" method="_on_enemy_username_area_area_exited"]
+[connection signal="area_entered" from="all_menus/character_selector/Host/host_username_area" to="all_menus/character_selector" method="_on_host_username_area_area_entered"]
+[connection signal="area_exited" from="all_menus/character_selector/Host/host_username_area" to="all_menus/character_selector" method="_on_host_username_area_area_exited"]
+[connection signal="area_entered" from="all_menus/character_selector/Enemy/enemy_username_area" to="all_menus/character_selector" method="_on_enemy_username_area_area_entered"]
+[connection signal="area_exited" from="all_menus/character_selector/Enemy/enemy_username_area" to="all_menus/character_selector" method="_on_enemy_username_area_area_exited"]

@@ -13,6 +13,9 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	USERNAME.text = str(cursor_index)
 
+func set_username(username: String) -> void:
+	USERNAME.text = username
+
 func _process(_delta: float) -> void:
 	"""
 	Upon any movement of the cursor, it's checked to see if it's
